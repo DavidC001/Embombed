@@ -133,4 +133,6 @@ void setUpKeyPad(uint_fast8_t *rowPorts, uint_fast16_t *rowPins,
         GPIO_setOutputHighOnPin(rowPorts[i], rowPins[i]);
     }
 
+    disableInterruptNumPad();
+
 }
