@@ -19,6 +19,8 @@
 
 #define MAXJSONTOKEN 200
 
+#define NUMCAVI 4
+
 typedef struct
 {
     char messaggi[NOTNOTMAXTURNS][NOTNOTMAXMSGDIM];    //cosa mostrare a schermo
@@ -38,7 +40,7 @@ typedef struct
 {
     char SerialNumber[SNMAXDIM];        //numero seriale bomba
     int time;                           //tempo prima esplosione in secondi
-    uint8_t FiloDaTagliare;        //varia tra 1-4 definisce il filo da tagliare
+    uint8_t FiliDaTagliare[NUMCAVI];        //varia tra 1-4 definisce il filo da tagliare
     notNot notNotGame;                  //gioco not not
     simonSays simonSaysGame;            //gioco led symon says
     char numPadCode[CODEPADMAXDIM];     //gioco tastierino numerico
@@ -50,7 +52,13 @@ void printGame(game gameInfo)
     int i, j, k;
     printf("\nSerialNumber: %s\n", gameInfo.SerialNumber);
     printf("time: %d seconds\n", gameInfo.time);
-    printf("\nFiloDaTagliare: %d\n", gameInfo.FiloDaTagliare);
+
+    printf("FiliDaTagliare: ");
+    for (i = 0; i < NUMCAVI; i++)
+    {
+        printf("%d ", gameInfo.FiliDaTagliare[i]);
+    }
+
     printf("\nCodice tastierino: %s\n", gameInfo.numPadCode);
     printf("\nnotNotGame turni %d: \n", gameInfo.notNotGame.num_turni);
     for (i = 0; i < gameInfo.notNotGame.num_turni; i++)
@@ -151,9 +159,38 @@ game gameParser(char *data, int size)
         else if (jsoneq(data, &t[i], "cavi") == 0)
         {
             ++i;
-            gameInfo.FiloDaTagliare = atoi(data + t[i].start);
-            //printf("FiloDaTagliare: %d\n", gameInfo.FiloDaTagliare);
+
+            //sono dentro l'array
+            if(t[i].type != JSMN_ARRAY)
+            {
+                //printf("JSON invalido");
+                gameInfo.valid_game = 0;
+                return gameInfo;
+            }
+            //controlla dimensione array
+            if(t[i].size != NUMCAVI)
+            {
+                //printf("JSON invalido");
+                gameInfo.valid_game = 0;
+                return gameInfo;
+            }
             ++i;
+
+            //copia valori array
+            for (k = 0; k < NUMCAVI; k++)
+            {
+                if(t[i].type != JSMN_PRIMITIVE)
+                {
+                    //printf("JSON invalido");
+                    gameInfo.valid_game = 0;
+                    return gameInfo;
+                }
+
+                gameInfo.FiliDaTagliare[k] = atoi(data + t[i].start);
+                //printf("FiliDaTagliare[%d]: %d\n", k, gameInfo.FiliDaTagliare[k]);
+
+                ++i;
+            }
         }
         else if (jsoneq(data, &t[i], "numPad") == 0)
         {

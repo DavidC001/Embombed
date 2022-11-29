@@ -8,7 +8,7 @@
     {
         "SN": "AB123456789",
         "TIME": 320,
-        "cavi": [0,1,0,1],
+        "cavi": 1,
         "numPad": "1234AjjSDsd",
         "notNot":{
             "messaggi":[
@@ -16,8 +16,8 @@
                 "up"
             ],
             "mosse":[
-                [4],
-                [2]
+                4,
+                2
             ]
         },
         "simonSays":{
@@ -47,13 +47,14 @@ int main(void)
 
     //dove appoggiare l'indirizzo del messaggio da leggere
     char* message;
-    //questa ï¿½ la mia flag che mi dice se ho ricevuto un messaggio
-    //dove viene anche salvato quanto lungo ï¿½ il messaggio
+    //questa è la mia flag che mi dice se ho ricevuto un messaggio
+    //dove viene anche salvato quanto lungo è il messaggio
     int size;
 
 
     setupUART(&message, &size, 2);
     // messaggio , size, dimensione dell'header in byte (2 = 16bit => messaggi lunghi massimo 2^16-1)
+    sendUART("start", 5);
 
     //struttura dati in cui saranno salvati i dati del gioco
     game gameInfo;
@@ -62,14 +63,14 @@ int main(void)
         __sleep();
         //se dopo aver ricevuto un interrrupt mi ritrovo con size diverso da 0 ho ricevuto un messaggio e posso leggerlo
         if(size!=0){
-            //chiamo la mia funzione che leggerï¿½ il messaggio ricevuto
-            //si puï¿½ cambiare ma ho messo che se il primo carattere della comunicazione ï¿½ G significa
+            //chiamo la mia funzione che leggerà il messaggio ricevuto
+            //si può cambiare ma ho messo che se il primo carattere della comunicazione è G significa
             //che sto passando le informazioni del gioco si potrebbe anche non mettere
             //definendo un ordine delle operazioni
             if(message[0]=='G'){
 
                 //passo il messaggio json con la sua grandezza
-                //che verrï¿½ interpretato
+                //che verrà interpretato
                 //ritornando la struct game
                 gameInfo = gameParser(message+1, size-1);
 
