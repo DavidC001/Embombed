@@ -1,3 +1,6 @@
+#ifndef __GAMEPARSER_H__
+#define __GAMEPARSER_H__
+
 #include <json.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
@@ -380,3 +383,5 @@ game gameParser(char *data, int size)
 
     return gameInfo;
 }
+
+#endif

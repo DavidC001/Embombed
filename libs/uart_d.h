@@ -1,5 +1,4 @@
 #ifndef __UARTCUSTOM_H__
-
 #define __UARTCUSTOM_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>

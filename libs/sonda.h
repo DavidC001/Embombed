@@ -1,3 +1,6 @@
+#ifndef __SONDA_H__
+#define __SONDA_H__
+
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include "ADC_subscription.h"
@@ -70,7 +73,7 @@ void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMe
     sondaADCMemory = ADCMemory;
     puntSonda = punt;
 
-    //setup port (A è sempre la terza)
+    //setup port (A ï¿½ sempre la terza)
     GPIO_setAsPeripheralModuleFunctionInputPin(port, pin, GPIO_TERTIARY_MODULE_FUNCTION);
 
     ADC14_configureSingleSampleMode(ADCMemory, true);
@@ -81,3 +84,5 @@ void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMe
     indexSondaADC = registerADC(ADCSondaIRQ, ADCIntNum);
     disableInterruptSonda();
 }
+
+#endif

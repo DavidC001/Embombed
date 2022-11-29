@@ -1,3 +1,6 @@
+#ifndef __KEYPAD_H__
+#define __KEYPAD_H__
+
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
 #define NUMROWS 4
@@ -43,7 +46,7 @@ void enableInterruptNumPad()
 }
 
 /*
- * ritorna la chiave che è stata premuta
+ * ritorna la chiave che ï¿½ stata premuta
  * nel caso di rilevazione durante il rilascio
  * viene ritornato il carattere 'E'
  * va quindi scartata la lettura
@@ -74,7 +77,7 @@ void evaluateKeyPad()
                 GPIO_setOutputHighOnPin(rowPort[k], rowPin[k]);
             }
 
-            //se è stato rilasciato immezzo alla lettura questa non è affidabile e viene scartata
+            //se ï¿½ stato rilasciato immezzo alla lettura questa non ï¿½ affidabile e viene scartata
             //oppure era un picco durante il rilascio
             if (!GPIO_getInputPinValue(colPort[i], colPin[i]))
             {
@@ -101,7 +104,7 @@ void IRQ_col(void)
  * NOTA: gli array non devo essere distrutti nel chiamante
  * IMPORTANTE: gli IRQ delle porte usate saranno bloccati
  * chiamando enableInterrupt vengono resettati gli IRQ
- * è quindi possibile modificarli cambiando modulo
+ * ï¿½ quindi possibile modificarli cambiando modulo
  * previa chiamata di disableInterrupt
  */
 void setUpKeyPad(uint_fast8_t *rowPorts, uint_fast16_t *rowPins,
@@ -136,3 +139,5 @@ void setUpKeyPad(uint_fast8_t *rowPorts, uint_fast16_t *rowPins,
     disableInterruptNumPad();
 
 }
+
+#endif

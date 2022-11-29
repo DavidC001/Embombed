@@ -1,3 +1,6 @@
+#ifndef __DOTMATRIX_H__
+#define __DOTMATRIX_H__
+
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
 #define MAT_OP_NOOP 0
@@ -87,7 +90,7 @@ void turnOnMat(){
  * P3.5 come clock
  * P3.6 con data
  *
- * il pin cs può essere configurato
+ * il pin cs puï¿½ essere configurato
  */
 void initMatrix(uint_fast8_t csPort, uint_fast16_t csPin){
     matPort = csPort;
@@ -116,3 +119,4 @@ void initMatrix(uint_fast8_t csPort, uint_fast16_t csPin){
 }
 
 
+#endif
