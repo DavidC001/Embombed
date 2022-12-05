@@ -56,6 +56,9 @@ void ADCSondaIRQ(void){
         }
 
         //printf("volt: %f nearest: %d\n",volt, nearestSonda[countSonda-1]);
+    }else{
+        countSonda = 0;
+        media = 0;
     }
 }
 
