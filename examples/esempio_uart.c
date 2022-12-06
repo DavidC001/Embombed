@@ -88,10 +88,10 @@ int main(void)
     MAP_WDT_A_holdTimer();
 
     //dove appoggiare l'indirizzo del messaggio da leggere
-    char* message;
+    volatile char* message;
     //questa � la mia flag che mi dice se ho ricevuto un messaggio
     //dove viene anche salvato quanto lungo � il messaggio
-    int size;
+    volatile int size;
 
 
     setupUART(&message, &size, 2);

@@ -24,7 +24,7 @@ void main(void)
     CS_initClockSignal(CS_SMCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_1);
     CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_128);
 
-    uint8_t rilevato = 0;
+    volatile uint8_t rilevato = 0;
     setupADC();
     setupSonda(GPIO_PIN5, GPIO_PORT_P5, ADC_INPUT_A0, ADC_MEM0, ADC_INT0,
                &rilevato);

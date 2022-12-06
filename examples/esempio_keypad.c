@@ -34,7 +34,7 @@ void main(void)
 	                         GPIO_PORT_P2
 	};
 
-	char pressed = 0;
+	volatile char pressed = 0;
 
 	/* Setting DCO to 48MHz */
 	/* Set the core voltage level to VCORE1 */

@@ -19,10 +19,10 @@ const eUSCI_UART_ConfigV1 UARTConfig=
             EUSCI_A_UART_8_BIT_LEN                  // 8 bit data length
     };
 
-int UARTPacketSize;
-int UARTReceivedSize;
-int UARTHeaderSize;
-int UARTReceivedHeaderSize;
+volatile int UARTPacketSize;
+volatile int UARTReceivedSize;
+volatile int UARTHeaderSize;
+volatile int UARTReceivedHeaderSize;
 int* UARTNotifySize;
 char** UARTCollectedMessage;
 

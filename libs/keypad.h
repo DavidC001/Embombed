@@ -9,7 +9,7 @@ uint_fast16_t *colPin;
 uint_fast8_t *rowPort;
 uint_fast8_t *colPort;
 
-uint_fast16_t status[4];
+volatile uint_fast16_t status[4];
 
 char *puntNumPad;
 
