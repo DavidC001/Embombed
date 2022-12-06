@@ -3,23 +3,9 @@
 
 #include <json.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-
+#include <constants.h>
 #include <stdio.h>
 #include <string.h>
-
-//incluso terminatore stringa
-#define SNMAXDIM 15
-#define CODEPADMAXDIM 20
-
-#define NOTNOTMAXTURNS 10
-#define NOTNOTMAXMSGDIM 25
-
-#define SIMONSAYSMAXTURNS 10
-#define SIMONSAYSMAXSTEPPERTURN 10
-
-#define MAXJSONTOKEN 200
-
-#define NUMCAVI 4
 
 typedef struct
 {

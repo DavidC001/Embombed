@@ -3,8 +3,7 @@
 
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-
-#define MAX_FUNC 10
+#include <constants.h>
 
 
 void (*intHandlers[MAX_FUNC])(void);

@@ -2,6 +2,7 @@
 #define __LCD_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
+#include <constants.h>
 
 typedef struct{
     uint_fast8_t port_rs;

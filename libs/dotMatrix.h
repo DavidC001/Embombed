@@ -2,13 +2,7 @@
 #define __DOTMATRIX_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-
-#define MAT_OP_NOOP 0
-#define MAT_OP_DECODEMODE 9
-#define MAT_OP_INTENSITY 10
-#define MAT_OP_SCANLIMIT 11
-#define MAT_OP_SHUTDOWN 12
-#define MAT_OP_DISPLAYTEST 15
+#include <constants.h>
 
 uint32_t eUSCIPort;
 uint_fast16_t matPin;

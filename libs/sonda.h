@@ -4,10 +4,8 @@
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include "ADC_subscription.h"
+#include <constants.h>
 #include <stdio.h>
-
-#define NUM_VOLT 9
-#define NUM_SAMPLES 100
 
 uint32_t sondaADCMemory;
 uint8_t* puntSonda;

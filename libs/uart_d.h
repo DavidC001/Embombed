@@ -2,6 +2,7 @@
 #define __UARTCUSTOM_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
+#include <constants.h>
 #include <stdlib.h>
 
 const eUSCI_UART_ConfigV1 UARTConfig=

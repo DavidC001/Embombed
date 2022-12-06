@@ -2,9 +2,7 @@
 #define __KEYPAD_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-
-#define NUMROWS 4
-#define NUMCOLS 4
+#include <constants.h>
 
 uint_fast16_t *rowPin;
 uint_fast16_t *colPin;
