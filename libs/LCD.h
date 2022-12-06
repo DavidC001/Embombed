@@ -94,8 +94,10 @@ void setupLCD(lcdConfig conf){
 
     __delay_cycles(96000);
     //max 2ms per return home command -> frequencyHz quindi devo aspettare frequency/1000*2
-    //imposto
+    //imposto numero di linee
     sendCommand(0x28);
+    //accendo display
+    sendCommand(0x0C);
     clearLCD();
 }
 
