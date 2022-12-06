@@ -44,14 +44,16 @@ void setupUART(char** message,int* size, int headerSize){
     GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P1,
                 GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
 
-    /* Setting DCO to 48MHz */
-    /* Set the core voltage level to VCORE1 */
+    /*
+    //Setting DCO to 48MHz 
+    //Set the core voltage level to VCORE1 
     PCM_setCoreVoltageLevel(PCM_VCORE1);
-    /* Set 2 flash wait states for Flash bank 0 and 1*/
+    //Set 2 flash wait states for Flash bank 0 and 1
     FlashCtl_setWaitState(FLASH_BANK0, 2);
     FlashCtl_setWaitState(FLASH_BANK1, 2);
-    /* Initializes Clock System */
+    //Initializes Clock System
     CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);
+    */
 
     /* Configuring UART Module */
     UART_initModule(EUSCI_A0_BASE, &UARTConfig);
