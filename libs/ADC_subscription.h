@@ -1,5 +1,5 @@
 #ifndef __ADCSUB_H__
-#def __ADCSUB_H__
+#define __ADCSUB_H__
 
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
