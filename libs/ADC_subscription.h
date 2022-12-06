@@ -41,7 +41,7 @@ int registerADC(void (*intHandler)(void), uint32_t ADCIntNum){
     ADC14_enableInterrupt(ADCIntNum);
 
     ADCFuncIntNum[ADCFuncIndex] = ADCIntNum;
-    intHandlers[ADCFuncIndex] = intHandler;
+    ADCIntHandlers[ADCFuncIndex] = intHandler;
     ADCenabled[ADCFuncIndex] = 1;
     ADCFuncIndex++;
 
@@ -86,7 +86,7 @@ void ADC14_IRQHandler(void)
 
     for(i=0;i<ADCFuncIndex;i++){
         if(ADCenabled[i] && (status & ADCFuncIntNum[i])){
-            (*intHandlers[i])();
+            (*ADCIntHandlers[i])();
         }
     }
 }
