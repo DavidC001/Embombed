@@ -4,10 +4,10 @@
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <constants.h>
 
-uint_fast16_t *rowPin;
-uint_fast16_t *colPin;
-uint_fast8_t *rowPort;
-uint_fast8_t *colPort;
+uint_fast16_t rowPin[NUMROWS];
+uint_fast16_t colPin[NUMCOLS];
+uint_fast8_t rowPort[NUMROWS];
+uint_fast8_t colPort[NUMCOLS];
 
 volatile uint_fast16_t status[4];
 
@@ -99,7 +99,6 @@ void IRQ_col(void)
 }
 
 /*
- * NOTA: gli array non devo essere distrutti nel chiamante
  * IMPORTANTE: gli IRQ delle porte usate saranno bloccati
  * chiamando enableInterrupt vengono resettati gli IRQ
  * � quindi possibile modificarli cambiando modulo
@@ -113,25 +112,25 @@ void setUpKeyPad(uint_fast8_t *rowPorts, uint_fast16_t *rowPins,
 
     puntNumPad = res;
 
-    colPort = colPorts;
-    colPin = colPins;
-    rowPort = rowPorts;
-    rowPin = rowPins;
-
+    for (i = 0; i < NUMROWS; i++)
+    {
+        rowPort[i] = rowPorts[i];
+        rowPin[i] = rowPins[i];
+        
+        GPIO_setAsOutputPin(rowPorts[i], rowPins[i]);
+        GPIO_setOutputHighOnPin(rowPorts[i], rowPins[i]);
+    }
     for (i = 0; i < NUMCOLS; i++)
     {
+        colPort[i] = colPorts[i];
+        colPin[i] = colPins[i];
+        
         GPIO_setAsInputPinWithPullDownResistor(colPort[i], colPin[i]);
         GPIO_clearInterruptFlag(colPort[i], colPin[i]);
         GPIO_enableInterrupt(colPort[i], colPin[i]);
 
         GPIO_unregisterInterrupt(colPorts[i]);
         GPIO_registerInterrupt(colPort[i], IRQ_col);
-    }
-
-    for (i = 0; i < NUMROWS; i++)
-    {
-        GPIO_setAsOutputPin(rowPorts[i], rowPins[i]);
-        GPIO_setOutputHighOnPin(rowPorts[i], rowPins[i]);
     }
 
     disableInterruptNumPad();
