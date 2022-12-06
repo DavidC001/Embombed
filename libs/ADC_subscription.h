@@ -24,7 +24,7 @@ void removeADC(int index){
     while(!ADC14_disableModule());
     int i;
     for(i=index;i<ADCFuncIndex-1;i++){
-        intHandlers[i] = intHandlers[i+1];
+        ADCIntHandlers[i] = ADCIntHandlers[i+1];
         ADCenabled[i] = ADCenabled[i+1];
     }
     ADCFuncIndex--;
