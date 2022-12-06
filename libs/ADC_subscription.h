@@ -6,7 +6,7 @@
 #include <constants.h>
 
 
-void (*intHandlers[MAX_FUNC])(void);
+void (*ADCIntHandlers[MAX_FUNC])(void);
 uint32_t ADCFuncIntNum[MAX_FUNC];
 uint8_t ADCenabled[MAX_FUNC];
 int ADCFuncIndex;
