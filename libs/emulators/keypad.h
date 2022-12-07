@@ -61,8 +61,8 @@ void IRQ_col(void)
             pthread_mutex_unlock(&mutex);
 
         }
-        //delay 10 seconds
-        sleep(10);
+        //delay 5 seconds
+        sleep(5);
     }
 }
 
