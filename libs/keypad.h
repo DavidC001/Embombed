@@ -9,7 +9,7 @@ uint_fast16_t colPin[NUMCOLS];
 uint_fast8_t rowPort[NUMROWS];
 uint_fast8_t colPort[NUMCOLS];
 
-volatile uint_fast16_t status[4];
+volatile uint_fast16_t statusKeypad[4];
 
 char *puntNumPad;
 
@@ -60,7 +60,7 @@ void evaluateKeyPad()
 
     for (i = 0; i < NUMCOLS; i++)
     {
-        if (status[i])
+        if (statusKeypad[i])
         {
             for (k = 0; k < NUMROWS; k++)
             {
@@ -92,7 +92,7 @@ void IRQ_col(void)
 {
     int i;
     for(i=0;i<NUMCOLS;i++){
-        status[i] = GPIO_getInterruptStatus(colPort[i], colPin[i]);
+        statusKeypad[i] = GPIO_getInterruptStatus(colPort[i], colPin[i]);
         GPIO_clearInterruptFlag(colPort[i], colPin[i]);
     }
     *puntNumPad = 1;
