@@ -42,14 +42,13 @@ void evaluateKeyPad()
 
 void IRQ_col(void)
 {
-    printf("IRQ_keypad started\n");
     while(1){
         if(enabledKeypad && *puntNumPad==0){
             //take mutex
             pthread_mutex_lock(&mutex);
 
             //ask it you want to simulate a key
-            printf("vuoi simulare una pressione? (y/n) ");
+            printf("vuoi simulare una pressione del keypad? (y/n) ");
             char c;
             scanf(" %c", &c);
             

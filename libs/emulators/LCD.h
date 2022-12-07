@@ -49,7 +49,7 @@ void displayLCD(rowSel row, char* string, int size){
 
     //take mutex
     pthread_mutex_lock(&mutex);
-    printf("current LCD content\n");
+    printf("printing, current LCD content\n");
     printf("\t%s\n", H_LCD_ROW[0]);
     printf("\t%s\n",H_LCD_ROW[1]);
     //release mutex
