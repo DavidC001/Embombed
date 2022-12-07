@@ -48,7 +48,10 @@ void ADCSondaIRQ(void){
             countSonda=0;
             media/=NUM_SAMPLES;
 
-            *puntSonda = nearestVoltSonda(media)+1;
+            if(*puntSonda == 0) //evita che venga modificata mentre sto lavorando sull'input
+            {
+                *puntSonda = nearestVoltSonda(media)+1;
+            }
 
             media=0;
         }
