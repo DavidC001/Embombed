@@ -95,7 +95,9 @@ void IRQ_col(void)
         statusKeypad[i] = GPIO_getInterruptStatus(colPort[i], colPin[i]);
         GPIO_clearInterruptFlag(colPort[i], colPin[i]);
     }
-    *puntNumPad = 1;
+    if(*puntNumPad==0){
+        *puntNumPad = 1;
+    }
 }
 
 /*
