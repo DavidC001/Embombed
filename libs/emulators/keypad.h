@@ -11,6 +11,7 @@
 
 int enabledKeypad = 0;
 char *puntNumPad;
+char validCharsNumPad[17] = {'1', '2', '3', 'A', '4', '5', '6', 'B', '7', '8', '9', 'C', '*', '0', '#', 'D', '\0' };
 
 void IRQ_col(void);
 
@@ -32,8 +33,10 @@ void evaluateKeyPad()
     pthread_mutex_lock(&mutex);
 
     //get input from keybord
-    printf("Inserisci il carattere da simulare per il keypad: ");
-    scanf(" %c", puntNumPad);
+    do{}
+        printf("Inserisci il carattere da simulare per il keypad: (valids: %s)", validCharsNumPad);
+        scanf(" %c", puntNumPad);
+    }while(!strchr(validCharsNumPad, *puntNumPad));
     //release mutex
     pthread_mutex_unlock(&mutex);
     

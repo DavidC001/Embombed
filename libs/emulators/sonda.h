@@ -17,9 +17,11 @@ void ADCSondaIRQ(void){
             char c;
             scanf(" %c", &c);
             if(c=='y'){
-                printf("quale input? (1-9) ");
-                char c;
-                scanf(" %c", &c);
+                do{}
+                    printf("quale input? (1-9) ");
+                    char c;
+                    scanf(" %c", &c);
+                }while(c<'1' || c>'9');
                 *puntSonda = c-'0';
             }
             pthread_mutex_unlock(&mutex);
