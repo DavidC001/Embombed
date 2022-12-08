@@ -23,7 +23,7 @@ void addMistakeControl(){
     }
 
     pthread_mutex_lock(&mutex);
-    printf("aggiunto un errore, numero totale: %d", numMistekesControl);
+    printf("aggiunto un errore, numero totale: %d\n", numMistekesControl);
     pthread_mutex_unlock(&mutex);
 }
 
