@@ -5,6 +5,7 @@
 //lib for thread
 #include <pthread.h>
 #include <stdio.h>
+#include <string.h>
 //libe for delay
 #include <unistd.h>
 #include "mutex.h"
