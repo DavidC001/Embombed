@@ -3,13 +3,7 @@
 
 //lib to get IRQs to work in mutex
 #include <pthread.h>
-
-typedef unsigned char uint_fast8_t;
-typedef unsigned short uint_fast16_t;
-
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
+#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
