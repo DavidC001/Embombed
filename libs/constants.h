@@ -39,4 +39,11 @@
 #define NUM_VOLT 9
 #define NUM_SAMPLES 100
 
+
+//games
+#define GAME_CODECRACKER 0
+#define GAME_NOTNOT 1
+#define GAME_SIMONSAYS 2
+#define GAME_CABLES 3
+
 #endif
