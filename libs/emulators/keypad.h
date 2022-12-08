@@ -33,7 +33,7 @@ void evaluateKeyPad()
     pthread_mutex_lock(&mutex);
 
     //get input from keybord
-    do{}
+    do{
         printf("Inserisci il carattere da simulare per il keypad: (valids: %s)", validCharsNumPad);
         scanf(" %c", puntNumPad);
     }while(!strchr(validCharsNumPad, *puntNumPad));

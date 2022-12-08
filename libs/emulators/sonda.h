@@ -17,7 +17,7 @@ void ADCSondaIRQ(void){
             char c;
             scanf(" %c", &c);
             if(c=='y'){
-                do{}
+                do{
                     printf("quale input? (1-9) ");
                     char c;
                     scanf(" %c", &c);
