@@ -4,6 +4,7 @@
 #include "LCD.h"
 #include <string.h>
 #include "mutex.h"
+#include "timer_subscription.h"
 
 volatile uint8_t numMistekesControl;
 int* timeControl;
@@ -28,7 +29,6 @@ void addMistakeControl(){
 
 
 void timeUpdateControl(){
-    while(1){
         if(enableControl && *timeControl>0){
             timeStepperControl++;
             if(timeStepperControl==4-numMistekesControl){
@@ -45,9 +45,6 @@ void timeUpdateControl(){
                 displayLCD(ROW_2, timeS, 5);
             }
         }
-        //sleep 250ms
-        usleep(250);
-    }
 }
 
 /*
@@ -88,8 +85,7 @@ void setupControl(int* time, char* SN, lcdConfig* LCD, uint8_t* ledPorts, uint16
      * inizializzo timer
      */
     enableControl=0;
-    pthread_t timeUpdateThread;
-    pthread_create(&timeUpdateThread, NULL, (void*)timeUpdateControl, NULL);
+    registerTimer(timeUpdateControl);
 }
 
 #endif
