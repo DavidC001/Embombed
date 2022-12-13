@@ -9,8 +9,8 @@ volatile uint8_t numMistekesControl;
 int* timeControl;
 int timerIndexControl;
 volatile uint8_t timeStepperControl;
-uint8_t errLedPortsControl[3];
-uint16_t errLedPinsControl[3];
+uint8_t errLedPortsControl[3] = {GPIO_PORT_P3,GPIO_PORT_P5,GPIO_PORT_P5};
+uint16_t errLedPinsControl[3] = {GPIO_PIN0,GPIO_PIN0,GPIO_PIN2};
 
 /*
  * aggiunge un errore velocizzando il timer
@@ -65,7 +65,7 @@ void startTimerControl(){
  * inizializza l'LCD (essendo l'unico modulo a contatto)
  * inizializza il timer e lo mette in pausa
  */
-void setupControl(int* time, char* SN, lcdConfig* LCD, uint8_t* ledPorts, uint16_t* ledPins){
+void setupControl(int* time, char* SN){
     timeControl = time;
     numMistekesControl = 0;
     timeStepperControl = 0;
@@ -73,7 +73,15 @@ void setupControl(int* time, char* SN, lcdConfig* LCD, uint8_t* ledPorts, uint16
     /*
      * inizializzo LCD
      */
-    setupLCD(*LCD);
+    lcdConfig LCD = {
+                           GPIO_PORT_P6, GPIO_PIN5,
+                           GPIO_PORT_P6, GPIO_PIN4,
+                           GPIO_PORT_P3, GPIO_PIN2,
+                           GPIO_PORT_P3, GPIO_PIN3,
+                           GPIO_PORT_P4, GPIO_PIN1,
+                           GPIO_PORT_P4, GPIO_PIN3
+                         };
+    setupLCD(LCD);
 
     //send SN to LCD
     displayLCD(ROW_1, SN, strlen(SN));
@@ -99,9 +107,6 @@ void setupControl(int* time, char* SN, lcdConfig* LCD, uint8_t* ledPorts, uint16
      */
     int i;
     for(i=0;i<3;i++){
-        errLedPinsControl[i] = ledPins[i];
-        errLedPortsControl[i] = ledPorts[i];
-
         GPIO_setAsOutputPin(errLedPortsControl[i], errLedPinsControl[i]);
         GPIO_setOutputLowOnPin(errLedPortsControl[i], errLedPinsControl[i]);
     }

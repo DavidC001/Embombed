@@ -19,17 +19,7 @@ void main(void)
 	setupTimer();
 
 	//inizializzo il modulo control
-	lcdConfig LCD = {
-	                   GPIO_PORT_P6, GPIO_PIN5,
-	                   GPIO_PORT_P6, GPIO_PIN4,
-	                   GPIO_PORT_P3, GPIO_PIN2,
-	                   GPIO_PORT_P3, GPIO_PIN3,
-	                   GPIO_PORT_P4, GPIO_PIN1,
-	                   GPIO_PORT_P4, GPIO_PIN3
-	                 };
-	uint8_t portsErr[3] = {GPIO_PORT_P2,GPIO_PORT_P5,GPIO_PORT_P5};
-    uint16_t pinsErr[3] = {GPIO_PIN5,GPIO_PIN0,GPIO_PIN2};
-	setupControl(&seconds, "BELLA\0",&LCD,portsErr,pinsErr);
+	setupControl(&seconds, "BELLA\0");
 
 	//faccio partire il countdown
 	startTimerControl();
