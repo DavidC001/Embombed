@@ -128,6 +128,7 @@ void setUpKeyPad(uint_fast8_t *rowPorts, uint_fast16_t *rowPins,
         colPin[i] = colPins[i];
         
         GPIO_setAsInputPinWithPullDownResistor(colPort[i], colPin[i]);
+        GPIO_interruptEdgeSelect(colPort[i], colPin[i], GPIO_LOW_TO_HIGH_TRANSITION);
         GPIO_clearInterruptFlag(colPort[i], colPin[i]);
         GPIO_enableInterrupt(colPort[i], colPin[i]);
 
