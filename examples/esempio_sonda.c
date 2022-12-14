@@ -1,7 +1,7 @@
 #include "msp.h"
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-#include "sonda.h"
+#include <sonda.h>
 
 /**
  * main.c
@@ -24,11 +24,12 @@ void main(void)
     CS_initClockSignal(CS_SMCLK, CS_DCOCLK_SELECT, CS_CLOCK_DIVIDER_1);
     CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_128);
 
-    volatile uint8_t rilevato = 0;
+    uint8_t rilevato = 0;
     setupADC();
-    setupSonda(GPIO_PIN5, GPIO_PORT_P5, ADC_INPUT_A0, ADC_MEM0, ADC_INT0,
+    setupSonda(GPIO_PIN5, GPIO_PORT_P5, ADC_INPUT_A0, ADC_MEM0,
                &rilevato);
     enableInterruptSonda();
+    enableConvADC();
 
     while (1)
     {

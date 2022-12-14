@@ -71,7 +71,7 @@ void enableInterruptSonda(){
 }
 
 
-void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMemory, uint32_t ADCIntNum, uint8_t* punt){
+void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMemory, uint8_t* punt){
 
     sondaADCMemory = ADCMemory;
     puntSonda = punt;
@@ -79,12 +79,10 @@ void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMe
     //setup port (A � sempre la terza)
     GPIO_setAsPeripheralModuleFunctionInputPin(port, pin, GPIO_TERTIARY_MODULE_FUNCTION);
 
-    ADC14_configureSingleSampleMode(ADCMemory, true);
     ADC14_configureConversionMemory(ADCMemory, ADC_VREFPOS_AVCC_VREFNEG_VSS,
                                         ADCInputMap, false);
-    ADC14_enableInterrupt(ADCIntNum);
 
-    indexSondaADC = registerADC(ADCSondaIRQ, ADCIntNum);
+    indexSondaADC = registerADC(ADCSondaIRQ);
     disableInterruptSonda();
 }
 
