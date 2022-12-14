@@ -7,7 +7,6 @@
 
 
 void (*ADCIntHandlers[MAX_FUNC])(void);
-uint32_t ADCFuncIntNum[MAX_FUNC];
 uint8_t ADCenabled[MAX_FUNC];
 int ADCFuncIndex;
 
@@ -37,21 +36,26 @@ void removeADC(int index){
  * ritorna l'indice dove viene salvato
  * non gestisce la mappatura della memoria che va fatta esternamente
  */
-int registerADC(void (*intHandler)(void), uint32_t ADCIntNum){
-    ADC14_enableInterrupt(ADCIntNum);
+int registerADC(void (*intHandler)(void)){
+    /* Triggering the start of the sample */
 
-    ADCFuncIntNum[ADCFuncIndex] = ADCIntNum;
     ADCIntHandlers[ADCFuncIndex] = intHandler;
     ADCenabled[ADCFuncIndex] = 1;
     ADCFuncIndex++;
 
-    if(ADCFuncIndex == 1) {
-        ADC14_toggleConversionTrigger();
-    }
-
     return (ADCFuncIndex-1);
 }
 
+void enableConvADC(){
+    ADC14_configureMultiSequenceMode(ADC_MEM0, ADC_MEM5, true);
+    ADC14_enableInterrupt(ADC_INT5);
+    /* Enabling Interrupts */
+    Interrupt_enableInterrupt(INT_ADC14);
+    //automatic iteration
+    ADC14_enableSampleTimer(ADC_AUTOMATIC_ITERATION);
+    ADC14_enableConversion();
+    ADC14_toggleConversionTrigger();
+}
 
 /*
  * start automatic iteration
@@ -64,15 +68,6 @@ void setupADC(){
     ADC14_enableModule();
     ADC14_initModule(ADC_CLOCKSOURCE_ADCOSC, ADC_PREDIVIDER_64, ADC_DIVIDER_8,
                 0);
-
-    /* Enabling Interrupts */
-    Interrupt_enableInterrupt(INT_ADC14);
-
-    //automatic iteration
-    ADC14_enableSampleTimer(ADC_AUTOMATIC_ITERATION);
-
-    /* Triggering the start of the sample */
-    ADC14_enableConversion();
 }
 
 void ADC14_IRQHandler(void)
@@ -80,12 +75,10 @@ void ADC14_IRQHandler(void)
     uint64_t status = ADC14_getEnabledInterruptStatus();
     ADC14_clearInterruptFlag(status);
 
-    //printf("ADC: %d\n", ADC14_getResult(ADC_MEM0));
-
     int i;
 
     for(i=0;i<ADCFuncIndex;i++){
-        if(ADCenabled[i] && (status & ADCFuncIntNum[i])){
+        if(ADCenabled[i]){
             (*ADCIntHandlers[i])();
         }
     }
