@@ -25,8 +25,18 @@ void addMistakeControl(){
     }
 
     //in futuro possiamo far vibrare il buzzer qui
+    printf("MISTAKE CONTROL");
 }
 
+void correctFeedBackControl(){
+    //manca
+    printf("CORRECT CONTROL\n");
+}
+
+void victoryFeedBackControl(){
+    //manca
+    printf("VICTORY CONTROL\n");
+}
 
 void timeUpdateControl(){
     timeStepperControl++;

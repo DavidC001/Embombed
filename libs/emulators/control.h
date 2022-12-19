@@ -27,6 +27,17 @@ void addMistakeControl(){
     pthread_mutex_unlock(&mutex);
 }
 
+void correctFeedBackControl(){
+    pthread_mutex_lock(&mutex);
+    printf("input corretto!\n");
+    pthread_mutex_unlock(&mutex);
+}
+
+void victoryFeedBackControl(){
+    pthread_mutex_lock(&mutex);
+    printf("gioco vinto!\n");
+    pthread_mutex_unlock(&mutex);
+}
 
 void timeUpdateControl(){
         if(enableControl && *timeControl>0){

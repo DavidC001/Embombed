@@ -50,10 +50,10 @@ void gameCC(){
                     if(CCNumPadChar==CCnumpadCode[CCInputLength]){
 
                         CCInputLength++;
-                        //play correct chime
+                        correctFeedBackControl();
 
                         if(CCInputLength==CCStringLength){
-                            //play win chime
+                            victoryFeedBackControl();
                         }
 
                     }else{
@@ -62,7 +62,7 @@ void gameCC(){
                     }
                     
                 }else{
-                    //play win chime
+                    victoryFeedBackControl();
                 }
             }
 
