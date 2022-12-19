@@ -1,1 +1,5 @@
-.vscode/settings.json
+.vscode
+msp/
+__pycache__
+*.csv
+testing/exec
