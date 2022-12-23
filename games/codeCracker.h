@@ -39,7 +39,8 @@ void gameCC(){
 
     //loop
     while(*CCTime>0 && *currGameCC==GAME_CODECRACKER){
-
+        _sleep();
+        
         if(CCNumPadChar!=0){
 
             evaluateKeyPad();
@@ -68,7 +69,6 @@ void gameCC(){
 
             CCNumPadChar = 0;
         }
-
     }
 
     //disabilitazione
