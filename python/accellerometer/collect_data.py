@@ -1,5 +1,5 @@
 import sys
-sys.path.append(R"C:\Users\david\Dropbox\embed\project\git\Embombed\python\serial")
+sys.path.append(R"..\serial")
 print(sys.path)
 from seriale import sendMessagge, awaitResponse, close
 
