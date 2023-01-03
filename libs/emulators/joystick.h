@@ -18,11 +18,10 @@ void ADCJoystickIRQ(void){
             scanf(" %c", &c);
             if(c=='y'){
                 do{
-                    printf("quale input? (1-4) ");
-                    char c;
+                    printf("quale input? (L U R D) ");
                     scanf(" %c", &c);
-                }while(c<'1' || c>'4');
-                *puntDirectionJoystick = c-'0';
+                }while(c!='L' && c!='U' && c!='R' && c!='D');
+                *puntDirectionJoystick = c;
             }
             pthread_mutex_unlock(&mutex);
         }

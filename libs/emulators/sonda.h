@@ -19,7 +19,6 @@ void ADCSondaIRQ(void){
             if(c=='y'){
                 do{
                     printf("quale input? (1-9) ");
-                    char c;
                     scanf(" %c", &c);
                 }while(c<'1' || c>'9');
                 *puntSonda = c-'0';
@@ -38,7 +37,7 @@ void enableInterruptSonda(){
     enableSonda = 1;
 }
 
-void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMemory, uint32_t ADCIntNum, uint8_t* punt){
+void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMemory, uint8_t* punt){
     puntSonda = punt;
 
     //start thread
