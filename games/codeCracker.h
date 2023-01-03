@@ -6,7 +6,7 @@
 #include "../libs/emulators/keypad.h"
 #include "../libs/emulators/control.h"
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-#include "../libs/constants.h"
+#include <constants.h>
 #include <string.h>
 
 
@@ -14,7 +14,7 @@ char* CCnumpadCode;
 int* CCTime;
 uint8_t* currGameCC;
 
-char CCNumPadChar;
+volatile char CCNumPadChar;
 char CCInputLength;
 char CCStringLength;
 
