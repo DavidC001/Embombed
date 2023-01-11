@@ -5,6 +5,7 @@
 
 char* puntDirectionJoystick;
 int indexJoystickADC;
+uint8_t releasedJoystick = 1;
 
 void ADCJoystickIRQ(){
     if(*puntDirectionJoystick==0){
@@ -16,7 +17,7 @@ void ADCJoystickIRQ(){
         y -= 0.5;
 
         float d = x*x+y*y;
-        if(d>0.1089) {
+        if(d>0.1089 && releasedJoystick) {
             if(x>0.30){
                 *puntDirectionJoystick = 'R';
             }
@@ -29,6 +30,9 @@ void ADCJoystickIRQ(){
             if(y<-0.3){
                 *puntDirectionJoystick = 'D';
             }
+            releasedJoystick = 0;
+        }else{
+            releasedJoystick = 1;
         }
     }
 }

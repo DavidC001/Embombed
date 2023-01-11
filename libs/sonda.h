@@ -15,6 +15,7 @@ int indexSondaADC;
 
 volatile int countSonda = 0;
 volatile double media=0;
+uint8_t releasedSonda = 1;
 
 int nearestVoltSonda(double voltage){
     int near = 0;
@@ -47,9 +48,10 @@ void ADCSondaIRQ(void){
             countSonda=0;
             media/=NUM_SAMPLES;
 
-            if(*puntSonda == 0) //evita che venga modificata mentre sto lavorando sull'input
+            if(*puntSonda == 0 && releasedSonda) //evita che venga modificata mentre sto lavorando sull'input e di ridare lo stesso
             {
                 *puntSonda = nearestVoltSonda(media)+1;
+                releasedSonda = 0;
             }
 
             media=0;
@@ -57,6 +59,7 @@ void ADCSondaIRQ(void){
 
         //printf("volt: %f nearest: %d\n",volt, nearestSonda[countSonda-1]);
     }else{
+        releasedSonda = 1;
         countSonda = 0;
         media = 0;
     }
