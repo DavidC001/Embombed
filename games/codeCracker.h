@@ -39,7 +39,7 @@ void gameCC(){
 
     //loop
     while(*CCTime>0 && *currGameCC==GAME_CODECRACKER){
-        _sleep();
+        __sleep();
         
         if(CCNumPadChar!=0){
 
