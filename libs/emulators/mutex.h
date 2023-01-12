@@ -17,7 +17,7 @@ void initMutex()
     pthread_mutexattr_destroy(&mymutexattr);
 }
 
-void _sleep()
+void __sleep()
 {
     //dummy function to simulate sleep
 }
