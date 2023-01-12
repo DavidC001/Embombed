@@ -1,6 +1,5 @@
 import sys
 sys.path.append(R"..\serial")
-print(sys.path)
 from seriale import sendMessagge, awaitResponse, close
 
 
