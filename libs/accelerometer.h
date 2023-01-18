@@ -78,7 +78,7 @@ void ADCAccelerometerIRQ(void)
         accBuffer=temp;
     }
 
-    if(accValid>5){
+    if(accValid>NUM_SAMPLES_ACC){
         *accFacePunt = accBuffer; //aggiunge delay, ma risultati più stabili
         accValid = 0;
     }
