@@ -48,6 +48,6 @@
 #define GAME_NONE 4
 
 //accelerometro
-#define NUM_SAMPLES_ACC 10
+#define NUM_SAMPLES_ACC 20
 
 #endif
