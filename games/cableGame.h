@@ -28,7 +28,7 @@ void setupCG(uint8_t* cables, int* time, uint8_t* currGame){
         cableCheckedCG[i] = 0; // Set all cables to unchecked
     }
 
-    uint_fast8_t Ports[NUMROWS] = {GPIO_PORT_P4, GPIO_PORT_P4, GPIO_PORT_P3, GPIO_PORT_P2}; // The ports of the cables
+    uint_fast8_t Ports[NUMROWS] = {GPIO_PORT_P4, GPIO_PORT_P4, GPIO_PORT_P1, GPIO_PORT_P2}; // The ports of the cables
     uint_fast16_t Pins[NUMROWS] = {GPIO_PIN7,GPIO_PIN6,GPIO_PIN7,GPIO_PIN5}; // The pins of the cables
     setupCables(Pins, Ports, cableStatusCG); // Setup the cables
 }
