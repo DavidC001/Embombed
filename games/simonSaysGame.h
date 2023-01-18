@@ -44,7 +44,7 @@ void setupSS(simonSays* game, int* time, uint8_t* currGame){
     turnSS=0;
 
     //setup dot matrix
-    initMatrix(GPIO_PORT_P1, GPIO_PIN6);
+    initMatrix(GPIO_PORT_P5, GPIO_PIN4);
     //setup sonda
     setupSonda(GPIO_PORT_P5,GPIO_PIN5,ADC_INPUT_A0,ADC_MEM0,&sondaRisSS);
 }
