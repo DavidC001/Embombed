@@ -45,5 +45,9 @@
 #define GAME_NOTNOT 1
 #define GAME_SIMONSAYS 2
 #define GAME_CABLES 3
+#define GAME_NONE 4
+
+//accelerometro
+#define NUM_SAMPLES_ACC 10
 
 #endif
