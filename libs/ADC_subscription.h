@@ -47,8 +47,8 @@ int registerADC(void (*intHandler)(void)){
 }
 
 void enableConvADC(){
-    ADC14_configureMultiSequenceMode(ADC_MEM0, ADC_MEM5, true);
-    ADC14_enableInterrupt(ADC_INT5);
+    ADC14_configureMultiSequenceMode(ADC_MEM0, ADC_MEM4, true);
+    ADC14_enableInterrupt(ADC_INT4);
     /* Enabling Interrupts */
     Interrupt_enableInterrupt(INT_ADC14);
     //automatic iteration
