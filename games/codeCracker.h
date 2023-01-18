@@ -1,10 +1,13 @@
 #ifndef __CODECRACKER_H__
 #define __CODECRACKER_H__
 
-//#include <keypad.h>
-//#include <control.h>
+#ifndef TESTING
+#include <keypad.h>
+#include <control.h>
+#else
 #include "../libs/emulators/keypad.h"
 #include "../libs/emulators/control.h"
+#endif
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <constants.h>
 #include <string.h>

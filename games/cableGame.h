@@ -1,10 +1,13 @@
 #ifndef __CABLEGAME_H__
 #define __CABLEGAME_H__
 
-//#include <cables.h>
-//#include <control.h>
+#ifndef TESTING
+#include <cables.h>
+#include <control.h>
+#else
 #include "../libs/emulators/cables.h"
 #include "../libs/emulators/control.h"
+#endif
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <constants.h>
 

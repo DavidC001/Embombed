@@ -1,12 +1,16 @@
 #ifndef __SIMONSAYSGAME_H__
 #define __SIMONSAYSGAME_H__
 
+#ifndef TESTING
 #include <dotMatrix.h>
 #include <sonda.h>
 #include <control.h>
-//#include "../libs/emulators/dotMatrix.h"
-//#include "../libs/emulators/sonda.h"
-//#include "../libs/emulators/control.h"
+#else
+#include "../libs/emulators/dotMatrix.h"
+#include "../libs/emulators/sonda.h"
+#include "../libs/emulators/control.h"
+#endif
+
 #include <constants.h>
 #include <game_parser.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
