@@ -9,7 +9,7 @@ volatile uint8_t numMistekesControl;
 int* timeControl;
 int timerIndexControl;
 volatile uint8_t timeStepperControl;
-uint8_t errLedPortsControl[3] = {GPIO_PORT_P3,GPIO_PORT_P5,GPIO_PORT_P5};
+uint8_t errLedPortsControl[3] = {GPIO_PORT_P3,GPIO_PORT_P4,GPIO_PORT_P5};
 uint16_t errLedPinsControl[3] = {GPIO_PIN0,GPIO_PIN0,GPIO_PIN2};
 
 /*
