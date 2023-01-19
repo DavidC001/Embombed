@@ -110,7 +110,7 @@ void gameNN(){
     directionJoystickNN = 0; // Set the direction of the joystick to 0
     if(!(turnNN==notNotGameNN->num_turni)) turnNN = 0; // reset the turn
     sSecondsNN = *NNTime; // Set the time at turn start
-    turnTimeNN = min(10,20-turnNN*2); // Set the time for the turn
+    turnTimeNN = *NNTime; // Set the time for the turn
     int seconds = *NNTime; // Set the time at game start
     enableInterruptJoystick(); // Enable the interrupts
     drawLCDNN();
@@ -124,10 +124,10 @@ void gameNN(){
             drawLCDNN(); // Draw the LCD
         }
 
-        if(sSecondsNN-*NNTime>=turnTimeNN){ // If the time is up
+        if(sSecondsNN-*NNTime>=turnTimeNN && !(turnNN==notNotGameNN->num_turni)){ // If the time is up
             addMistakeControl(); // Add a mistake
             turnNN = 0; // Reset the turn
-            turnTimeNN = min(10,20-turnNN*2); // Set the time for the turn
+            turnTimeNN = *NNTime; // Set the time for the turn
             sSecondsNN = *NNTime; // Set the time at turn start
             drawLCDNN(); // Draw the LCD
         }
@@ -173,7 +173,7 @@ void gameNN(){
                 }else {
                     addMistakeControl();
                     turnNN = 0;
-                    turnTimeNN = min(10,20-turnNN*2);
+                    turnTimeNN = *NNTime;
                 }
 
                 sSecondsNN = *NNTime; // Set the time at turn start
