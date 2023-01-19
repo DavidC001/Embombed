@@ -56,8 +56,8 @@ void serialSend(char d){
     GPIO_setOutputHighOnPin(H_LCD_CONFIG.port_e, H_LCD_CONFIG.pin_e);
     GPIO_setOutputLowOnPin(H_LCD_CONFIG.port_e, H_LCD_CONFIG.pin_e);
 
-    //aspetto 40 microsecondi
-    __delay_cycles(1920);
+    //aspetto 40 microsecondi (facciamo 100)
+    __delay_cycles(4800);
 }
 
 void sendCommand(char cm){
@@ -110,7 +110,7 @@ void displayLCD(rowSel row, char* string, int size){
     sendCommand(0x00);
 
     int i;
-    int space = (16-size)/2;
+    int space = (17-size)/2;
     for(i=0;i<space;i++){
         sendData(' ');
     }
