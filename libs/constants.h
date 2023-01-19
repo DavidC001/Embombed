@@ -50,4 +50,7 @@
 //accelerometro
 #define NUM_SAMPLES_ACC 20
 
+//music
+#define NUM_NOTES 6
+
 #endif
