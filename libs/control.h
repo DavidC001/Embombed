@@ -4,6 +4,7 @@
 #include <LCD.h>
 #include <string.h>
 #include <timer_subscription.h>
+#include <buzzer.h>
 
 volatile uint8_t numMistekesControl;
 int* timeControl;
@@ -11,7 +12,10 @@ int timerIndexControl;
 volatile uint8_t timeStepperControl;
 uint8_t errLedPortsControl[3] = {GPIO_PORT_P3,GPIO_PORT_P4,GPIO_PORT_P5};
 uint16_t errLedPinsControl[3] = {GPIO_PIN0,GPIO_PIN0,GPIO_PIN2};
-
+int errFreqControl[6] = {150,150,150,100,100,100};
+int correctFreqControl[6] = {300,300,300,400,400,400};
+int victoryFreqControl[11] = {600,500,600,400,600,300,600,200,600,800,800};
+int explosionFreqControl[20] = {300,300,300,300,0,200,200,200,200,200,200,0,100,100,100,100,100,100,100,100};
 /*
  * aggiunge un errore velocizzando il timer
  */
@@ -24,18 +28,20 @@ void addMistakeControl(){
         *timeControl = 0;
     }
 
-    //in futuro possiamo far vibrare il buzzer qui
-    printf("MISTAKE CONTROL");
+    sendBuzzer(errFreqControl, 6);
 }
 
 void correctFeedBackControl(){
-    //manca
-    printf("CORRECT CONTROL\n");
+    sendBuzzer(correctFreqControl, 6);
 }
 
 void victoryFeedBackControl(){
-    //manca
-    printf("VICTORY CONTROL\n");
+    sendBuzzer(victoryFreqControl, 11);
+}
+
+void explosionSound(){
+    sendBuzzer(explosionFreqControl, 20);
+    stopMusic();
 }
 
 void timeUpdateControl(){
@@ -120,6 +126,11 @@ void setupControl(int* time, char* SN){
         GPIO_setAsOutputPin(errLedPortsControl[i], errLedPinsControl[i]);
         GPIO_setOutputLowOnPin(errLedPortsControl[i], errLedPinsControl[i]);
     }
+
+    /*
+     * inizializzo buzzer
+    */
+    setupBuzzer();
 }
 
 #endif
