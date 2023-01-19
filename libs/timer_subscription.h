@@ -34,9 +34,6 @@ int registerTimer(void (*intHandler)(void)){
 void setupTimer(){
     TimerFuncIndex = 0;
 
-    CS_setReferenceOscillatorFrequency(CS_REFO_32KHZ);
-    CS_initClockSignal(CS_ACLK, CS_REFOCLK_SELECT, CS_CLOCK_DIVIDER_32);
-
     Timer_A_UpModeConfig config = {
                                        TIMER_A_CLOCKSOURCE_ACLK,
                                        TIMER_A_CLOCKSOURCE_DIVIDER_1,
@@ -45,17 +42,17 @@ void setupTimer(){
                                        TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,
                                        TIMER_A_SKIP_CLEAR
     };
-    Timer_A_configureUpMode(TIMER_A0_BASE, &config);
-    Interrupt_enableInterrupt(INT_TA0_0);
+    Timer_A_configureUpMode(TIMER_A1_BASE, &config);
+    Interrupt_enableInterrupt(INT_TA1_0);
 
     /* Starting the Timer_A0 in up mode */
-    Timer_A_startCounter(TIMER_A0_BASE, TIMER_A_UP_MODE);
+    Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_UP_MODE);
 }
 
-void TA0_0_IRQHandler(void)
+void TA1_0_IRQHandler(void)
 {
     /* clear the timer pending interrupt flag */
-    Timer_A_clearCaptureCompareInterrupt(TIMER_A0_BASE, TIMER_A_CAPTURECOMPARE_REGISTER_0);
+    Timer_A_clearCaptureCompareInterrupt(TIMER_A1_BASE, TIMER_A_CAPTURECOMPARE_REGISTER_0);
 
     int i;
     for(i=0;i<TimerFuncIndex;i++){
