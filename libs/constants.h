@@ -51,6 +51,8 @@
 #define NUM_SAMPLES_ACC 20
 
 //music
-#define NUM_NOTES 6
+#define NUM_NOTES 31
+#define TEMPO 90
+#define GRID 32
 
 #endif
