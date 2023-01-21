@@ -3,3 +3,5 @@ msp/
 __pycache__
 *.csv
 testing/exec
+python/genGame/game
+python/genGame/manual
