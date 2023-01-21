@@ -1,6 +1,8 @@
 #ifndef __MUTEX_H__
 #define __MUTEX_H__
 
+#define min(a, b)               (((a) < (b)) ? (a) : (b))
+
 //lib to get IRQs to work in mutex
 #include <pthread.h>
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
