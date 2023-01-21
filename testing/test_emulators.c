@@ -31,7 +31,7 @@ int main(){
 
     //conf sonda
     uint8_t sonda=0;
-    setupSonda(0,0,0,0,0,&sonda);
+    setupSonda(0,0,0,0,&sonda);
     enableInterruptSonda();
 
     while(1){
