@@ -36,7 +36,9 @@ void showSequence(){
         while(time<=*SSTime) //wait at least 1 second
         {
             if(!(*SSTime>0 && *currGameSS==GAME_SIMONSAYS)) return;
-            __sleep(); // Wait for the time to pass
+            #ifndef TESTING
+            __sleep();
+            #endif
         }
     }
 }
