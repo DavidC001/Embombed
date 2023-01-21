@@ -92,7 +92,7 @@ void IRQ_col(void)
 {
     int i;
     for(i=0;i<NUMCOLS;i++){
-        statusKeypad[i] = GPIO_getInterruptStatus(colPort[i], colPin[i]);
+        statusKeypad[i] = GPIO_getInputPinValue(colPort[i], colPin[i]);
         GPIO_clearInterruptFlag(colPort[i], colPin[i]);
     }
     if(*puntNumPad==0){
