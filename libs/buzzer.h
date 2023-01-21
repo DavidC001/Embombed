@@ -4,6 +4,7 @@
 /* DriverLib Includes */
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 #include <constants.h>
+#include <notes.h>
 
 /* Timer_A Compare Configuration Parameter  (PWM) */
 Timer_A_CompareModeConfig compareConfig_PWM = {
@@ -23,20 +24,18 @@ Timer_A_UpModeConfig upConfig = {
         TIMER_A_DO_CLEAR                        // Clear value
         };
 
-
-const int notesMusic[NUM_NOTES]={110,82,104,69,73,69};
-//uses block size of site:https://onlinesequencer.net/ with 110 bpm (around 125ms)
-const int durationMusic[NUM_NOTES]={3,3,4,2,2,2};
+int notesMusic[NUM_NOTES] = {B3,B4,F4S,D4S,B4,F4S,D4S,C4,C5,G5,E5,C5,G5,E5,B3,B4,F4S,D4S,B4,F4S,D4S,D4S,E4,F4,F4,F4S,G4,G4,G4S,A4,B4};
+int durationMusic[NUM_NOTES] = {2,2,2,2,1,3,4,2,2,2,2,1,3,4,2,2,2,2,1,3,4,1,1,1,1,1,1,1,1,2,4};
 int currentNote = 0;
 int currentNoteDuration = 0;
-int pauseMusic = 0;
+uint8_t pauseMusic = 0;
 
 void startMusic(){
     //set up A2 timer as metronome
     Timer_A_UpModeConfig config = {
             TIMER_A_CLOCKSOURCE_ACLK,
             TIMER_A_CLOCKSOURCE_DIVIDER_1,
-            125,
+            60000/(TEMPO*GRID),
             TIMER_A_TAIE_INTERRUPT_DISABLE,
             TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,
             TIMER_A_SKIP_CLEAR
@@ -58,7 +57,7 @@ void TA2_0_IRQHandler(void)
     Timer_A_clearCaptureCompareInterrupt(TIMER_A2_BASE, TIMER_A_CAPTURECOMPARE_REGISTER_0);
     currentNoteDuration++;
     if(!pauseMusic){
-        if(currentNoteDuration >= durationMusic[currentNote]){
+        if(currentNoteDuration >= GRID/durationMusic[currentNote]){
             currentNote++;
             currentNoteDuration = 0;
             if(currentNote == NUM_NOTES){
