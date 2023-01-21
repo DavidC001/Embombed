@@ -39,6 +39,12 @@ void victoryFeedBackControl(){
     pthread_mutex_unlock(&mutex);
 }
 
+void explosionSound(){
+    pthread_mutex_lock(&mutex);
+    printf("BOOM!\n");
+    pthread_mutex_unlock(&mutex);
+}
+
 void timeUpdateControl(){
         if(enableControl && *timeControl>0){
             timeStepperControl++;
