@@ -43,7 +43,9 @@ void gameCG(){
 
     //game loop
     while(*CGTime>0 && *currGameCG==GAME_CABLES){ // While there is time left and the current game is cable cut
+        #ifndef TESTING
         __sleep();
+        #endif
 
         if(!won){ // If the player hasn't won yet
             //check the cut cables

@@ -117,7 +117,9 @@ void gameNN(){
 
     //game loop
     while(*NNTime>0 && *currGameNN==GAME_NOTNOT){ // While there is time left and the current game is notNot
-        __sleep(); // waked by timer and ADC interrupts
+        #ifndef TESTING
+        __sleep();
+        #endif
         
         if(seconds!=*NNTime){ // If a second has passed
             seconds = *NNTime;

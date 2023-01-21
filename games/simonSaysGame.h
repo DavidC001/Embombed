@@ -69,7 +69,9 @@ void gameSS(){
 
     //game loop
     while(*SSTime>0 && *currGameSS==GAME_SIMONSAYS){ // While there is time left and the current game is still simon says
-        __sleep(); //woke up by timer and ADC interrupts
+        #ifndef TESTING
+        __sleep();
+        #endif
 
         //when an input is received
         if(sondaRisSS!=0){
