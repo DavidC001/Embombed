@@ -59,7 +59,7 @@ void printGame(game gameInfo)
         printf("    luci: \n");
         for (j = 0; j < gameInfo.simonSaysGame.mossePerTurno[i]; j++)
         {
-            printf("     mosse corrette %d: ", j);
+            printf("     matrice %d: ", j);
             for (k = 0; k < 8; k++)
             {
                 printf("%d ", gameInfo.simonSaysGame.matrix[i][j][k]);
@@ -97,11 +97,11 @@ game gameParser(char *data, int size)
     gameInfo.valid_game = 1;
 
     jsmn_init(&p);
-    r = jsmn_parse(&p, data, size, t, 128); // "s" is the char array holding the json content
+    r = jsmn_parse(&p, data, size, t, MAXJSONTOKEN); // "s" is the char array holding the json content
 
     if (r < 0)
     {
-        //printf("JSON invalido");
+        //printf("JSON invalido jsmn %d", r);
         gameInfo.valid_game = 0;
         return gameInfo;
     }
@@ -109,7 +109,7 @@ game gameParser(char *data, int size)
     /* Assume the top-level element is an object */
     if (r < 1 || t[0].type != JSMN_OBJECT)
     {
-        //printf("JSON invalido");
+        //printf("JSON invalido obj");
         gameInfo.valid_game = 0;
         return gameInfo;
     }
@@ -149,14 +149,14 @@ game gameParser(char *data, int size)
             //sono dentro l'array
             if(t[i].type != JSMN_ARRAY)
             {
-                //printf("JSON invalido");
+                //printf("JSON invalido cavi");
                 gameInfo.valid_game = 0;
                 return gameInfo;
             }
             //controlla dimensione array
             if(t[i].size != NUMCAVI)
             {
-                //printf("JSON invalido");
+                //printf("JSON invalido num cavi");
                 gameInfo.valid_game = 0;
                 return gameInfo;
             }
@@ -167,7 +167,7 @@ game gameParser(char *data, int size)
             {
                 if(t[i].type != JSMN_PRIMITIVE)
                 {
-                    //printf("JSON invalido");
+                    //printf("JSON invalido cavi");
                     gameInfo.valid_game = 0;
                     return gameInfo;
                 }
@@ -343,8 +343,7 @@ game gameParser(char *data, int size)
                             for (l = 0; l < 8; l++)
                             {
                                 //salvo il char che codifica in binario gli 8 led della riga l
-                                gameInfo.simonSaysGame.matrix[j][q][l] =
-                                        data[t[i].start];
+                                gameInfo.simonSaysGame.matrix[j][q][l] =atoi(data + t[i].start);
                                 //printf("il numero binario che codifica la riga di led e': %d\n", gameInfo.simonSaysGame.matrix[j][q][l]);
                                 ++i;
                             }
