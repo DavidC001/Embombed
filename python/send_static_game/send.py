@@ -5,9 +5,9 @@ from seriale import sendMessagge, awaitResponse, close
 json = """
 {
     "SN": "AB123456789",
-    "TIME": 20,
+    "TIME": 200,
     "cavi": [0,1,0,1],
-    "numPad": "1234AjjSDsd",
+    "numPad": "1234",
     "notNot":{
         "messaggi":[
             "down",
@@ -25,13 +25,13 @@ json = """
     "simonSays":{
         "ledAccesi":[
             [
-                ["a","b","c","d","a","b","c","d"],
-                ["a","b","c","d","a","b","c","d"],
-                ["a","b","c","d","a","b","c","d"]
+                [1,2,3,4,5,6,7,8],
+                [1,2,3,4,5,6,7,8],
+                [1,2,3,4,5,6,7,8]
             ],
             [
-                ["a","b","c","d","a","b","c","d"],
-                ["a","b","c","d","a","b","c","d"]
+                [1,2,3,4,5,6,7,8],
+                [1,2,3,4,5,6,7,8]
             ]
         ],
         "mosse":[
