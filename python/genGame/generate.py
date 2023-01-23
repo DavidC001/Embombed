@@ -196,13 +196,12 @@ def genManual():
     manual = """
     <html>
     <head>
-    <style>
 
+    <style>
     html {
         display: table;
         margin: auto;
     }
-
     body {
     display: table-cell;
     vertical-align: middle;
@@ -228,11 +227,7 @@ def genManual():
         var simon = -1;
         var notNot = -1;
         function showSimon(id){
-    """
-    manual += f"""
-            for (let i = 0; i < {len(simonSaysLookUpTableRef)}; i++) 
-    """
-    manual += """
+            for (let i = 0; i < """+f"{len(simonSaysLookUpTableRef)}"+"""; i++) 
             {
                 document.getElementById("Simon"+i).style.display = "none";
             }
@@ -246,11 +241,7 @@ def genManual():
         }
 
         function showNotNot(id){
-    """
-    manual += f"""
-            for (let i = 0; i < {len(notNotColorRef)}; i++)
-    """
-    manual += """
+            for (let i = 0; i < +"""+f"{len(notNotColorRef)}"+"""; i++)
         {
                 document.getElementById("NotNot"+i).style.display = "none";
             }
@@ -284,13 +275,9 @@ def genManual():
     """
 
     # keypad
-    manual += f"""
-    <h3>Keypad</h3>
-    """
+    manual += "<h3>Keypad</h3>"
     for i in range(len(numpadSNRef)):
-        manual += f"""
-        <p>if the {i+1} digit of the code is the {numpadSNRef[i]+1} char of the SN</p>
-        """
+        manual += f"<p>if the {i+1} digit of the code is the {numpadSNRef[i]+1} char of the SN</p>"
 
     # not not
     manual += """
@@ -302,9 +289,7 @@ def genManual():
         <ul class="dropdown-menu">
     """
     for i in range(len(notNotColorRef)):
-        manual += f"""
-        <li ><a onclick="showNotNot({i})">Turn {i+1}</a></li>
-        """
+        manual += f"<li ><a onclick=\"showNotNot({i})\">Turn {i+1}</a></li>"
     manual += """
         </ul>
     </div>
