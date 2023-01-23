@@ -5,3 +5,4 @@ __pycache__
 testing/exec
 python/genGame/game
 python/genGame/manual
+python/game/manual.html
