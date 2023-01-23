@@ -113,17 +113,17 @@ def genSimonSays():
         turnTable = []
         #generate a random 3x3 0-1 matrix and save it in the table
         for j in range(0, 20):
-            mat = [[random.randint(0, 1) for _ in range(3)] for _ in range(3)]
-            #check if the matrix is already in the table
-            alreadyIn = False
-            for k in range(0, len(turnTable)):
-                if mat == turnTable[k]["mat"]:
-                    alreadyIn = True
-                    break
-            if not alreadyIn:
-                turnTable.append({"mat": mat, "move":random.randint(1, 9)})
-            else:
-                j -= 1
+            alreadyIn = True
+            mat = []
+            while alreadyIn:
+                mat = [[random.randint(0, 1) for _ in range(3)] for _ in range(3)]
+                #check if the matrix is already in the table
+                alreadyIn = False
+                for k in range(0, len(turnTable)):
+                    if mat == turnTable[k]["mat"]:
+                        alreadyIn = True
+                        break
+            turnTable.append({"mat": mat, "move":random.randint(1, 9)})
         lookUpTables.append(turnTable)
     simonSaysLookUpTableRef = lookUpTables
     #generate the game
@@ -225,8 +225,8 @@ def genManual():
     </style>
 
     <script>
-        var simon = 0;
-        var notNot = 0;
+        var simon = -1;
+        var notNot = -1;
         function showSimon(id){
     """
     manual += f"""
@@ -238,6 +238,11 @@ def genManual():
             }
             document.getElementById("Simon"+id).style.display = "block";
             simon = id;
+            if (id == """+f"{len(simonSaysLookUpTableRef)-1}"+"""){
+                document.getElementById("nextSimon").disabled = true;
+            }else{
+                document.getElementById("nextSimon").disabled = false;
+            }
         }
 
         function showNotNot(id){
@@ -251,6 +256,11 @@ def genManual():
             }
             document.getElementById("NotNot"+id).style.display = "block";
             notNot = id;
+            if (id == """+f"{len(notNotColorRef)-1}"+"""){
+                document.getElementById("nextNotNot").disabled = true;
+            }else{
+                document.getElementById("nextNotNot").disabled = false;
+            }
         }
     </script>
     
@@ -298,6 +308,8 @@ def genManual():
     manual += """
         </ul>
     </div>
+    <button onclick="showNotNot(0)" class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span></button>
+    <button onclick="showNotNot(notNot+1)" class="btn btn-primary" id="nextNotNot"><span class="glyphicon glyphicon-forward"></span></button>
     """
     #the cube state is shown as a square with the sides colored as the colors in the list
     for i in range(len(notNotColorRef)):
@@ -331,6 +343,8 @@ def genManual():
     manual += """
     </ul>
     </div>
+    <button class="btn btn-primary" type="button" onclick="showSimon(0)"><span class="glyphicon glyphicon-repeat"></span></button>
+    <button class="btn btn-primary" type="button" onclick="showSimon(simon+1)" id="nextSimon"><span class="glyphicon glyphicon-forward"></span></button>
     """
     for i in range(len(simonSaysLookUpTableRef)):
         manual += f"""
