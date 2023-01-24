@@ -110,7 +110,7 @@ void displayLCD(rowSel row, char* string, int size){
     sendCommand(0x00);
 
     int i;
-    int space = (17-size)/2;
+    int space = (16-size)/2;
     for(i=0;i<space;i++){
         sendData(' ');
     }
