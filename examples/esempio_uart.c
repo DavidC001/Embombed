@@ -88,13 +88,13 @@ int main(void)
     MAP_WDT_A_holdTimer();
 
     //dove appoggiare l'indirizzo del messaggio da leggere
-    volatile char* message;
+    volatile char message[100];
     //questa � la mia flag che mi dice se ho ricevuto un messaggio
     //dove viene anche salvato quanto lungo � il messaggio
     volatile int size;
 
 
-    setupUART(&message, &size, 2);
+    setupUART(message, &size, 2);
     // messaggio , size, dimensione dell'header in byte (2 = 16bit => messaggi lunghi massimo 2^16-1)
 
     while(1){
@@ -106,7 +106,6 @@ int main(void)
             //resetto size quando ho finito di leggere il messaggio e libero la comunicazione
             //comunicazioni mentre elaboravo il messaggio sono state rifiutate dopo l'invio dell'header
             //inviando il messaggio 'R'
-            free(message);
             size=0;
         }
     }
