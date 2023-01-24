@@ -1,5 +1,5 @@
 import random
-import os
+import json
 
 #vars to generate the manual
 numpadSNRef = []
@@ -11,6 +11,7 @@ def genCavi(SN):
     # generate a random cavi based on the serial number
     cavi = []
     SNlen = len(SN)
+    caviSNRef.clear()
     caviSNRef.append(random.randint(0, SNlen - 1))
     if SN[caviSNRef[0]] in "AEIOU":
         cavi.append(1)
@@ -43,6 +44,7 @@ def genNumPad(SN):
     # generate a random numPad
     numPad = ""
     snlen = len(SN)
+    numpadSNRef.clear()
     for i in range(random.randint(4, 10)):
         n = random.randint(0, snlen - 1)
         while (SN[n] not in "0123456789ABCD*#"):
@@ -56,6 +58,7 @@ def genNotNot():
     notNotColors = ["red", "blue", "green", "yellow", "purple", "orange", "white", "black"]
     messaggi = [] # composed of N negations and then the color
     mosse = [] # composed of the correct possible moves
+    notNotColorRef.clear()
     
     for i in range(numTurni):
         #generate 4 random colors
@@ -94,12 +97,13 @@ def genSimonSays():
     #use it to generate the led matrix and the moves
     #save the table to be used in the manual
     global simonSaysLookUpTableRef
+    simonSaysLookUpTableRef = []
     numTurni = random.randint(4, 10)
     lookUpTables = []
     for i in range (0, numTurni):
         turnTable = []
         #generate a random 3x3 0-1 matrix and save it in the table
-        for j in range(0, 20):
+        for j in range(0, 10):
             alreadyIn = True
             mat = []
             while alreadyIn:
@@ -122,11 +126,11 @@ def genSimonSays():
     for i in range(0, numTurni):
         movesTurno = []
         matTurno = []
-        numStep = random.randint(4, 8)
+        numStep = random.randint(2, 4)
         for j in range(0, numStep):
-            move = random.randint(0, 19)
+            move = random.randint(0, len(lookUpTables[i])-1)
             while len(movesTurno)>1 and move == movesTurno[-1]:
-                move = random.randint(0, 19)
+                move = random.randint(0, len(lookUpTables[i])-1)
             movesTurno.append(lookUpTables[i][move]["move"])
             #convert the mat in 8x8 like follows and encode each row as a char
             mat8x8 = []
@@ -179,6 +183,10 @@ def generateGame():
         "simonSays": simonSays
     }
     print("game generated")
+
+    with open("game.json", "w") as write_file:
+        json.dump(game, write_file)
+
     return game
 
 def genManual():
@@ -254,20 +262,20 @@ def genManual():
     # cable cut
     manual += f"""
     <h3>Cables</h3>
-    <h4>blue</h4>
+    <h4>purple</h4>
     <p>if the {caviSNRef[0]+1} digit of the serial number is not a vowel, cut the wire</p>
     <h4>yellow</h4>
-    <p>if the {caviSNRef[1]+1} digit of the serial number is a number, cut the wire if the number is even</p>
+    <p>if the {caviSNRef[1]+1} digit of the serial number is a number, cut the wire if the number is odd</p>
     <h4>green</h4>
-    <p>if the {caviSNRef[2]+1} digit of the serial number is an even letter (ACEGIKMOQSUWY), cut the wire</p>
-    <h4>purple</h4>
-    <p>if the {caviSNRef[3]+1} digit of the serial number is a number cut the wire if the number is odd, otherwise cut the wire</p>
+    <p>if the {caviSNRef[2]+1} digit of the serial number is an even letter (ACEGIKMOQSUWY), do not cut the wire</p>
+    <h4>red</h4>
+    <p>if the {caviSNRef[3]+1} digit of the serial number is a number cut the wire if the number is even, otherwise cut the wire</p>
     """
 
     # keypad
-    manual += "<h3>Keypad</h3>"
+    manual += "<h3>Keypad</h3>\n"
     for i in range(len(numpadSNRef)):
-        manual += f"<p>if the {i+1} digit of the code is the {numpadSNRef[i]+1} char of the SN</p>"
+        manual += f"<p>if the {i+1} digit of the code is the {numpadSNRef[i]+1} char of the SN</p>\n"
 
     # not not
     manual += """
@@ -291,7 +299,7 @@ def genManual():
         manual += f"""
         <div id="NotNot{i}" style="display: none">
         <h5>Turn {i+1}</h5>
-        <div class="square" style="border-top-color: {notNotColorRef[i][0]}; border-right-color: {notNotColorRef[i][1]}; border-bottom-color: {notNotColorRef[i][2]}; border-left-color: {notNotColorRef[i][3]}"></div>
+        <div class="square" style="border-left-color: {notNotColorRef[i][0]}; border-top-color: {notNotColorRef[i][1]}; border-right-color: {notNotColorRef[i][2]}; border-bottom-color: {notNotColorRef[i][3]}"></div>
         </div>
         """
     
@@ -341,7 +349,7 @@ def genManual():
                 manual += "<tr>"
                 for l in range(3):
                     manual += "<td>"
-                    if simonSaysLookUpTableRef[i][j]["mat"][k][l] == 0:
+                    if simonSaysLookUpTableRef[i][j]["mat"][l][k] == 0:
                         #empty square
                         manual += "O"
                     else:
