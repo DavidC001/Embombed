@@ -2,6 +2,10 @@
 #define __CONST_H__
 
 
+//UART
+#define MAX_MSG_SIZE 50000
+
+
 //ADC
 #define MAX_FUNC 10
 
@@ -25,7 +29,7 @@
 #define SIMONSAYSMAXTURNS 10
 #define SIMONSAYSMAXSTEPPERTURN 8
 
-#define MAXJSONTOKEN 1000
+#define MAXJSONTOKEN 3000
 
 #define NUMCAVI 4
 
