@@ -138,7 +138,7 @@ def genSimonSays():
         numStep = random.randint(4, 8)
         for j in range(0, numStep):
             move = random.randint(0, 19)
-            while move == movesTurno[-1]:
+            while len(movesTurno)>1 and move == movesTurno[-1]:
                 move = random.randint(0, 19)
             movesTurno.append(lookUpTables[i][move]["move"])
             #convert the mat in 8x8 like follows and encode each row as a char
