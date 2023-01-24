@@ -58,7 +58,7 @@ void disableInterruptCables(){
  * by default interrupts are disabled
  * will overwrite port interrupt!!!
  *
- * ordine cavi: B Y G R
+ * ordine cavi: P Y G R
  */
 void setupCables(uint_fast16_t* pins, uint_fast8_t* ports,uint8_t* conn){
     connectedCables = conn;
