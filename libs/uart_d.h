@@ -24,10 +24,10 @@ volatile int UARTReceivedSize;
 volatile int UARTHeaderSize;
 volatile int UARTReceivedHeaderSize;
 int* UARTNotifySize;
-char** UARTCollectedMessage;
+char* UARTCollectedMessage;
 
 
-void setupUART(char** message,int* size, int headerSize){
+void setupUART(char* message,int* size, int headerSize){
     UARTPacketSize = 0;
     UARTReceivedSize = 0;
     UARTHeaderSize = headerSize;
@@ -37,7 +37,6 @@ void setupUART(char** message,int* size, int headerSize){
     *UARTNotifySize = 0;
 
     UARTCollectedMessage = message;
-    *UARTCollectedMessage = NULL;
 
 
     /* Selecting P1.2 and P1.3 in UART mode */
@@ -96,7 +95,6 @@ void EUSCIA0_IRQHandler(void)
             ++UARTReceivedHeaderSize;
             if(UARTReceivedHeaderSize == UARTHeaderSize){
                 if(*UARTNotifySize==0) {
-                    *UARTCollectedMessage = (char *)malloc(sizeof(char) * UARTPacketSize);
                     UART_transmitData(EUSCI_A0_BASE, 'B'); //begin transission
                 } else {
                     UARTReceivedHeaderSize = 0;
@@ -106,7 +104,7 @@ void EUSCIA0_IRQHandler(void)
             }
         }else{
             //save char if buffer empty
-            (*UARTCollectedMessage)[UARTReceivedSize] = UART_receiveData(EUSCI_A0_BASE);
+            UARTCollectedMessage[UARTReceivedSize] = UART_receiveData(EUSCI_A0_BASE);
             ++UARTReceivedSize;
 
             //if the entire message has been received then send to callback the message
