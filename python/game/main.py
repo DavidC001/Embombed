@@ -1,8 +1,9 @@
 import server
 import generate
 import json
-from seriale import sendMessagge, awaitResponse, close
 import multiprocessing
+from seriale import sendMessagge, awaitResponse, close, openSer
+
 
 def processJobs():
     #write to manual.html message to start press reset button on MSP432
@@ -11,6 +12,8 @@ def processJobs():
 
     serverProcess = multiprocessing.Process(target=server.run)
     serverProcess.start()
+
+    openSer()
 
     while(1):
         awaitResponse(2)
