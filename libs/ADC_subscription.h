@@ -18,7 +18,7 @@ void enableADC(int index){
     ADCenabled[index] = 1;
 }
 
-//usata quasi mai credo poco importa l'efficenza
+//usata credo mai poco importa l'efficenza
 void removeADC(int index){
     while(!ADC14_disableModule());
     int i;
