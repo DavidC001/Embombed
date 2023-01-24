@@ -72,6 +72,7 @@ void sendData(char data){
 
 void clearLCD(){
     sendCommand(0x01);
+    __delay_cycles(96000);
 }
 
 /*
