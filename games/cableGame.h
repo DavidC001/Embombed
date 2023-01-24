@@ -53,7 +53,7 @@ void gameCG(){
             for(i=0;i<NUMCAVI;i++){ // Check each cable
                 if( !(cableStatusCG[i] || cableCheckedCG[i]) ){ // If the cable is cut and not already checked
                     cableCheckedCG[i] = 1; // Set the cable to checked
-                    if(!CablesToCutCG[i]){ // If the cable shouldn't be cut
+                    if(!CablesToCutCG[i]){ // If the cable should be cut
                         correctFeedBackControl(); // Give the player a correct feedback
                     }else{
                         addMistakeControl(); // Give the player a mistake feedback
