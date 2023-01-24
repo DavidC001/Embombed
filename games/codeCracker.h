@@ -26,6 +26,7 @@ void setupCC(char* code, int* time, uint8_t* currGame){
     CCTime = time;
     currGameCC = currGame;
     CCStringLength = strlen(CCnumpadCode);
+    CCInputLength = 0;
 
     uint_fast8_t rowPorts[NUMROWS] = {GPIO_PORT_P4, GPIO_PORT_P2, GPIO_PORT_P2, GPIO_PORT_P5};
     uint_fast16_t rowPins[NUMROWS] = {GPIO_PIN5,GPIO_PIN6,GPIO_PIN4,GPIO_PIN6};
@@ -36,7 +37,6 @@ void setupCC(char* code, int* time, uint8_t* currGame){
 
 void gameCC(){
     //inizializzazione
-    CCInputLength = 0;
     CCNumPadChar = 0;
     enableInterruptNumPad();
 
