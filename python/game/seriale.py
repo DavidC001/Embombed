@@ -1,6 +1,10 @@
 import serial
 
-ser = serial.Serial(port='COM7', baudrate=115200, bytesize=8, parity='N', stopbits=1)
+ser = None
+
+def openSer():
+    global ser
+    ser = serial.Serial(port='COM7', baudrate=115200, bytesize=8, parity='N', stopbits=1)
 
 def sendMessagge(message, headerSize):
     preso = False
