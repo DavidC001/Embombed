@@ -123,6 +123,9 @@ def genSimonSays():
                     if mat == turnTable[k]["mat"]:
                         alreadyIn = True
                         break
+                #refuse the matrix if it is all 0
+                if mat == [[0, 0, 0], [0, 0, 0], [0, 0, 0]]:
+                    alreadyIn = True
             turnTable.append({"mat": mat, "move":random.randint(1, 9)})
         lookUpTables.append(turnTable)
     simonSaysLookUpTableRef = lookUpTables
@@ -135,6 +138,8 @@ def genSimonSays():
         numStep = random.randint(4, 8)
         for j in range(0, numStep):
             move = random.randint(0, 19)
+            while move == movesTurno[-1]:
+                move = random.randint(0, 19)
             movesTurno.append(lookUpTables[i][move]["move"])
             #convert the mat in 8x8 like follows and encode each row as a char
             mat8x8 = []
