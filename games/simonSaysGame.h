@@ -33,13 +33,14 @@ void showSequence(){
         if(*SSTime<=0) return; // If the time is up, return
         sendMat(SSgame->matrix[turnSS][i]);
         int time = *SSTime;
-        while(time<=*SSTime) //wait at least 1 second
+        while(time<=*SSTime+1) //wait at least 2 second
         {
             if(!(*SSTime>0 && *currGameSS==GAME_SIMONSAYS)) return;
             #ifndef TESTING
             __sleep();
             #endif
         }
+        clearMat();
     }
 }
 
