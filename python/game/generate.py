@@ -65,7 +65,11 @@ def genNotNot():
         mosseTurno = []
         colors = []
         for j in range(4):
-            colors.append(notNotColors[random.randint(0, len(notNotColors) - 1)])
+            color = notNotColors[random.randint(0, len(notNotColors) - 1)]
+            colors.append(color)
+        #if colors are all the same, change one of them
+        while colors[0] == colors[1] and colors[1] == colors[2] and colors[2] == colors[3]:
+            colors[random.randint(0, 3)] = notNotColors[random.randint(0, len(notNotColors) - 1)]
         #save colors in the reference
         notNotColorRef.append(colors)
         #generate the message
@@ -75,12 +79,12 @@ def genNotNot():
         messaggio += colors[numColor]
         for j in range(4):
             if (numNeg == 2 or numNeg==0):
-                if j==numColor:
+                if colors[j]==colors[numColor]:
                     mosseTurno.append(1)
                 else:
                     mosseTurno.append(0)
             else:
-                if j==numColor:
+                if colors[j]==colors[numColor]:
                     mosseTurno.append(0)
                 else:
                     mosseTurno.append(1)
@@ -98,12 +102,12 @@ def genSimonSays():
     #save the table to be used in the manual
     global simonSaysLookUpTableRef
     simonSaysLookUpTableRef = []
-    numTurni = random.randint(4, 10)
+    numTurni = random.randint(4, 6)
     lookUpTables = []
     for i in range (0, numTurni):
         turnTable = []
         #generate a random 3x3 0-1 matrix and save it in the table
-        for j in range(0, 10):
+        for j in range(0, 5):
             alreadyIn = True
             mat = []
             while alreadyIn:
@@ -126,7 +130,7 @@ def genSimonSays():
     for i in range(0, numTurni):
         movesTurno = []
         matTurno = []
-        numStep = random.randint(2, 4)
+        numStep = random.randint(2, 3)
         for j in range(0, numStep):
             move = random.randint(0, len(lookUpTables[i])-1)
             while len(movesTurno)>1 and move == movesTurno[-1]:
@@ -165,7 +169,7 @@ def generateGame():
     global SN
     SN = ''.join(random.choice("ABCD0123456789") for _ in range(0,13))
     # generate a random time
-    TIME = random.randint(120, 240)
+    TIME = random.randint(300, 480)
     # generate a random cavi
     cavi = genCavi(SN)
     numPad = genNumPad(SN)
@@ -263,13 +267,13 @@ def genManual():
     manual += f"""
     <h3>Cables</h3>
     <h4>purple</h4>
-    <p>if the {caviSNRef[0]+1} digit of the serial number is not a vowel, cut the wire</p>
+    <p>the {caviSNRef[0]+1} digit of the serial number is not a vowel, cut the wire</p>
     <h4>yellow</h4>
-    <p>if the {caviSNRef[1]+1} digit of the serial number is a number, cut the wire if the number is odd</p>
+    <p>the {caviSNRef[1]+1} digit of the serial number is a number, cut the wire if the number is odd</p>
     <h4>green</h4>
-    <p>if the {caviSNRef[2]+1} digit of the serial number is an even letter (ACEGIKMOQSUWY), do not cut the wire</p>
+    <p>the {caviSNRef[2]+1} digit of the serial number is an even letter (ACEGIKMOQSUWY), do not cut the wire</p>
     <h4>red</h4>
-    <p>if the {caviSNRef[3]+1} digit of the serial number is a number cut the wire if the number is even, otherwise cut the wire</p>
+    <p>the {caviSNRef[3]+1} digit of the serial number is a number cut the wire if the number is even, otherwise cut the wire</p>
     """
 
     # keypad
@@ -351,9 +355,9 @@ def genManual():
                     manual += "<td>"
                     if simonSaysLookUpTableRef[i][j]["mat"][l][k] == 0:
                         #empty square
-                        manual += "O"
+                        manual += "&#11036"
                     else:
-                        manual += "X"
+                        manual += "&#128997"
                     manual += "</td>"
                 manual += "</tr>"
             manual +="</table> </td> </tr>"
