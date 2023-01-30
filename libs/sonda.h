@@ -14,7 +14,7 @@ double validVoltSonda[NUM_VOLT]={3.3,3,2.48,1.98,1.65,1.416,1.1,0.66,0.3};
 int indexSondaADC;
 
 volatile int countSonda = 0;
-volatile double media=0;
+volatile long double media=0;
 uint8_t releasedSonda = 1;
 
 int nearestVoltSonda(double voltage){
