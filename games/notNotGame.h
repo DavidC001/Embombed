@@ -166,7 +166,7 @@ void gameNN(){
                 if(correct){
                     correctFeedBackControl();
                     turnNN++;
-                    turnTimeNN = min(10,20-turnNN*2);
+                    turnTimeNN = max(5,20-turnNN*2);
 
                     if(turnNN==notNotGameNN->num_turni){
                         victoryFeedBackControl();
