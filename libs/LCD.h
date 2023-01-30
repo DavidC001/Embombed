@@ -56,8 +56,8 @@ void serialSend(char d){
     GPIO_setOutputHighOnPin(H_LCD_CONFIG.port_e, H_LCD_CONFIG.pin_e);
     GPIO_setOutputLowOnPin(H_LCD_CONFIG.port_e, H_LCD_CONFIG.pin_e);
 
-    //aspetto 40 microsecondi (facciamo 100)
-    __delay_cycles(4800);
+    //aspetto 40 microsecondi (facciamo 200)
+    __delay_cycles(9600);
 }
 
 void sendCommand(char cm){
