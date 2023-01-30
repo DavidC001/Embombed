@@ -41,7 +41,7 @@
 
 //sonda
 #define NUM_VOLT 9
-#define NUM_SAMPLES 100
+#define NUM_SAMPLES 150
 
 
 //games
@@ -55,8 +55,8 @@
 #define NUM_SAMPLES_ACC 20
 
 //music
-#define NUM_NOTES 31
-#define TEMPO 90
+#define NUM_NOTES 678
+#define TEMPO 60
 #define GRID 32
 
 #endif
