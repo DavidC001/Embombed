@@ -386,8 +386,6 @@ def genManual():
     with open("manual\\manual.html", 'w', encoding="utf8") as outfile:
         outfile.write(manual)
     print("manual.html created")
-    
-random.seed()
 
 def saveRefToJson():
     # save the reference in a json file
