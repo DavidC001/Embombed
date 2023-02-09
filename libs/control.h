@@ -3,12 +3,10 @@
 
 #include <LCD.h>
 #include <string.h>
-#include <timer_subscription.h>
 #include <buzzer.h>
 
 volatile uint8_t numMistekesControl;
 int* timeControl;
-int timerIndexControl;
 volatile uint8_t timeStepperControl;
 uint8_t errLedPortsControl[3] = {GPIO_PORT_P3,GPIO_PORT_P4,GPIO_PORT_P5};
 uint16_t errLedPinsControl[3] = {GPIO_PIN0,GPIO_PIN0,GPIO_PIN2};
@@ -16,6 +14,47 @@ int errFreqControl[6] = {150,150,150,100,100,100};
 int correctFreqControl[6] = {300,300,300,400,400,400};
 int victoryFreqControl[11] = {600,500,600,400,600,300,600,200,600,800,800};
 int explosionFreqControl[20] = {300,300,300,300,0,200,200,200,200,200,200,0,100,100,100,100,100,100,100,100};
+
+void setupTimer(){
+    Timer_A_UpModeConfig config = {
+                                       TIMER_A_CLOCKSOURCE_ACLK,
+                                       TIMER_A_CLOCKSOURCE_DIVIDER_1,
+                                       250,
+                                       TIMER_A_TAIE_INTERRUPT_DISABLE,
+                                       TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,
+                                       TIMER_A_SKIP_CLEAR
+    };
+    Timer_A_configureUpMode(TIMER_A1_BASE, &config);
+}
+
+void TA1_0_IRQHandler(void)
+{
+    /* clear the timer pending interrupt flag */
+    Timer_A_clearCaptureCompareInterrupt(TIMER_A1_BASE, TIMER_A_CAPTURECOMPARE_REGISTER_0);
+    timeStepperControl++;
+
+    if(timeStepperControl>=4-numMistekesControl){
+        (*timeControl)--;
+        timeStepperControl = 0;
+        //send time to LCD
+        int minutes = *timeControl / 60;
+        int seconds = *timeControl % 60;
+        char time[5];
+        time[0] = minutes / 10 + '0';
+        time[1] = minutes % 10 + '0';
+        time[2] = ':';
+        time[3] = seconds / 10 + '0';
+        time[4] = seconds % 10 + '0';
+        displayLCD(ROW_2, time, 5);
+
+        if(*timeControl == 0){
+            Interrupt_disableInterrupt(INT_TA1_0);
+            while(numMistekesControl!=3){
+                addMistakeControl();
+            }
+        }
+    }
+}
 /*
  * aggiunge un errore velocizzando il timer
  */
@@ -24,7 +63,7 @@ void addMistakeControl(){
 
     numMistekesControl++;
     if(numMistekesControl==3){
-        disableTimer(timerIndexControl);
+        Interrupt_disableInterrupt(INT_TA1_0);
         *timeControl = 0;
     }
 
@@ -44,37 +83,14 @@ void explosionSound(){
     stopMusic();
 }
 
-void timeUpdateControl(){
-    timeStepperControl++;
-
-    if(timeStepperControl>=4-numMistekesControl){
-        (*timeControl)--;
-        timeStepperControl = 0;
-        //send time to LCD
-        int minutes = *timeControl / 60;
-        int seconds = *timeControl % 60;
-        char time[5];
-        time[0] = minutes / 10 + '0';
-        time[1] = minutes % 10 + '0';
-        time[2] = ':';
-        time[3] = seconds / 10 + '0';
-        time[4] = seconds % 10 + '0';
-        displayLCD(ROW_2, time, 5);
-
-        if(*timeControl == 0){
-            disableTimer(timerIndexControl);
-            while(numMistekesControl!=3){
-                addMistakeControl();
-            }
-        }
-    }
-}
-
 /*
  * inizia il countdown
  */
 void startTimerControl(){
-    enableTimer(timerIndexControl);
+    Interrupt_enableInterrupt(INT_TA1_0);
+
+    /* Starting the Timer_A0 in up mode */
+    Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_UP_MODE);
 }
 
 /*
@@ -115,8 +131,7 @@ void setupControl(int* time, char* SN){
     /*
      * inizializzo timer
      */
-    timerIndexControl=registerTimer(timeUpdateControl);
-    disableTimer(timerIndexControl);
+    setupTimer();
 
     /*
      * inizializzo LEDs
