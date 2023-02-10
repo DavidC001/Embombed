@@ -44,6 +44,9 @@ The only resources needed to run the project are in the following directories:
 - "libs" and "games": those folders need to be added to the include search path
 - "main.c": this is the main script to run for the program to start
 
+Create a CCS project for the MSP, add the includes search path and copy the main.c file. Then you can connect the MSP, flash the program and then run main.py.
+At first nothing will happen, press the reset button on the MSP (as stated on the webpage at port 8080) and start playing.
+
 ## Presentation and Video
 
 - PowerPoint Presentation: [Link to PowerPoint presentation]
