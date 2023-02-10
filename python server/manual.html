@@ -1,0 +1,306 @@
+
+    <html>
+    <head>
+
+    <style>
+    html {
+        display: table;
+        margin: auto;
+    }
+    body {
+    display: table-cell;
+    vertical-align: middle;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+    .square {
+        height: 100px;
+        width: 100px;
+        border: 5px solid;
+        align: center;
+    }
+    </style>
+
+    <script>
+        var simon = -1;
+        var notNot = -1;
+        function showSimon(id){
+            for (let i = 0; i < 4; i++) 
+            {
+                document.getElementById("Simon"+i).style.display = "none";
+            }
+            document.getElementById("Simon"+id).style.display = "block";
+            simon = id;
+            if (id == 3){
+                document.getElementById("nextSimon").disabled = true;
+            }else{
+                document.getElementById("nextSimon").disabled = false;
+            }
+        }
+
+        function showNotNot(id){
+            for (let i = 0; i < +8; i++)
+        {
+                document.getElementById("NotNot"+i).style.display = "none";
+            }
+            document.getElementById("NotNot"+id).style.display = "block";
+            notNot = id;
+            if (id == 7){
+                document.getElementById("nextNotNot").disabled = true;
+            }else{
+                document.getElementById("nextNotNot").disabled = false;
+            }
+        }
+    </script>
+    
+    </head>
+    <body class="content-center">
+    <h1>Keep Talking and Nobody Explodes</h1>
+    <h2>Manual</h2>
+    
+    <h3>Cables</h3>
+    <h4>purple</h4>
+    <p>the 2 digit of the serial number is not a vowel, cut the wire</p>
+    <h4>yellow</h4>
+    <p>the 10 digit of the serial number is a number, cut the wire if the number is odd</p>
+    <h4>green</h4>
+    <p>the 1 digit of the serial number is an even letter (ACEGIKMOQSUWY), do not cut the wire</p>
+    <h4>red</h4>
+    <p>the 5 digit of the serial number is a number cut the wire if the number is even, otherwise cut the wire</p>
+    <h3>Keypad</h3>
+<p>if the 1 digit of the code is the 11 char of the SN</p>
+<p>if the 2 digit of the code is the 9 char of the SN</p>
+<p>if the 3 digit of the code is the 9 char of the SN</p>
+<p>if the 4 digit of the code is the 1 char of the SN</p>
+<p>if the 5 digit of the code is the 2 char of the SN</p>
+<p>if the 6 digit of the code is the 11 char of the SN</p>
+<p>if the 7 digit of the code is the 11 char of the SN</p>
+
+    <h3>Not Not</h3>
+    <p>This is the cube state for every turn</p>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Turn
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+    <li ><a onclick="showNotNot(0)">Turn 1</a></li><li ><a onclick="showNotNot(1)">Turn 2</a></li><li ><a onclick="showNotNot(2)">Turn 3</a></li><li ><a onclick="showNotNot(3)">Turn 4</a></li><li ><a onclick="showNotNot(4)">Turn 5</a></li><li ><a onclick="showNotNot(5)">Turn 6</a></li><li ><a onclick="showNotNot(6)">Turn 7</a></li><li ><a onclick="showNotNot(7)">Turn 8</a></li>
+        </ul>
+    </div>
+    <button onclick="showNotNot(0)" class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span></button>
+    <button onclick="showNotNot(notNot+1)" class="btn btn-primary" id="nextNotNot"><span class="glyphicon glyphicon-forward"></span></button>
+    
+        <div id="NotNot0" style="display: none">
+        <h5>Turn 1</h5>
+        <div class="square" style="border-left-color: blue; border-top-color: blue; border-right-color: orange; border-bottom-color: blue"></div>
+        </div>
+        
+        <div id="NotNot1" style="display: none">
+        <h5>Turn 2</h5>
+        <div class="square" style="border-left-color: orange; border-top-color: green; border-right-color: green; border-bottom-color: black"></div>
+        </div>
+        
+        <div id="NotNot2" style="display: none">
+        <h5>Turn 3</h5>
+        <div class="square" style="border-left-color: red; border-top-color: purple; border-right-color: white; border-bottom-color: yellow"></div>
+        </div>
+        
+        <div id="NotNot3" style="display: none">
+        <h5>Turn 4</h5>
+        <div class="square" style="border-left-color: orange; border-top-color: white; border-right-color: yellow; border-bottom-color: green"></div>
+        </div>
+        
+        <div id="NotNot4" style="display: none">
+        <h5>Turn 5</h5>
+        <div class="square" style="border-left-color: yellow; border-top-color: black; border-right-color: black; border-bottom-color: black"></div>
+        </div>
+        
+        <div id="NotNot5" style="display: none">
+        <h5>Turn 6</h5>
+        <div class="square" style="border-left-color: green; border-top-color: yellow; border-right-color: white; border-bottom-color: white"></div>
+        </div>
+        
+        <div id="NotNot6" style="display: none">
+        <h5>Turn 7</h5>
+        <div class="square" style="border-left-color: white; border-top-color: white; border-right-color: orange; border-bottom-color: red"></div>
+        </div>
+        
+        <div id="NotNot7" style="display: none">
+        <h5>Turn 8</h5>
+        <div class="square" style="border-left-color: red; border-top-color: black; border-right-color: black; border-bottom-color: yellow"></div>
+        </div>
+        <h3>Simon Says</h3>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Seleziona turno <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" onclick="showSimon(0)">
+                Turn 1
+            </a>
+        </li>
+        
+        <li>
+            <a class="dropdown-item" onclick="showSimon(1)">
+                Turn 2
+            </a>
+        </li>
+        
+        <li>
+            <a class="dropdown-item" onclick="showSimon(2)">
+                Turn 3
+            </a>
+        </li>
+        
+        <li>
+            <a class="dropdown-item" onclick="showSimon(3)">
+                Turn 4
+            </a>
+        </li>
+        
+    </ul>
+    </div>
+    <button class="btn btn-primary" type="button" onclick="showSimon(0)"><span class="glyphicon glyphicon-repeat"></span></button>
+    <button class="btn btn-primary" type="button" onclick="showSimon(simon+1)" id="nextSimon"><span class="glyphicon glyphicon-forward"></span></button>
+    
+        <div id="Simon0" style="display: none">
+        <h4>Turn 1</h4>
+        <table class="table table-bordered row">
+        <tr>
+        <th>Move</th>
+        <th>Matrix</th>
+        </tr>
+        
+            <tr>
+            <td>8</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>1</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#128997</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>3</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+        </table>
+        </div>
+        <div id="Simon1" style="display: none">
+        <h4>Turn 2</h4>
+        <table class="table table-bordered row">
+        <tr>
+        <th>Move</th>
+        <th>Matrix</th>
+        </tr>
+        
+            <tr>
+            <td>7</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>4</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+        </table>
+        </div>
+        <div id="Simon2" style="display: none">
+        <h4>Turn 3</h4>
+        <table class="table table-bordered row">
+        <tr>
+        <th>Move</th>
+        <th>Matrix</th>
+        </tr>
+        
+            <tr>
+            <td>6</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>8</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#128997</td><td>&#128997</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>6</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>7</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr></table> </td> </tr>
+        </table>
+        </div>
+        <div id="Simon3" style="display: none">
+        <h4>Turn 4</h4>
+        <table class="table table-bordered row">
+        <tr>
+        <th>Move</th>
+        <th>Matrix</th>
+        </tr>
+        
+            <tr>
+            <td>6</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#11036</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>3</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>5</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr></table> </td> </tr>
+            <tr>
+            <td>9</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#11036</td><td>&#128997</td></tr><tr><td>&#128997</td><td>&#11036</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#128997</td></tr></table> </td> </tr>
+            <tr>
+            <td>1</td>
+            <td>
+            <table class="table table-bordered col"><tr><td>&#128997</td><td>&#128997</td><td>&#11036</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#128997</td></tr><tr><td>&#11036</td><td>&#128997</td><td>&#11036</td></tr></table> </td> </tr>
+        </table>
+        </div>
+    <br><br>
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+    </html>
+    
