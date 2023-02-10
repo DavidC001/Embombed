@@ -50,7 +50,7 @@ The project is organized in the following way:
   ├── python dev         # files used to develop the python script
   │   └── ...
   |
-  ├── development_process_spec.pdf        # file compiled during the development process containing the general thoughts and the decisions taken (not exhaustive for personal use only, mostly drivers)
+  ├── development_process_spec.pdf        # file compiled during the development process containing the general thoughts and the decisions taken (not exhaustive for personal use, mostly drivers)
   ├── README.md          # this file
   ├── LICENSE            # license file
   └── ...
