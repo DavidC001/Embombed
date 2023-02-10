@@ -18,7 +18,7 @@
   * 2  KΩ x 2
   * 10 KΩ x 1
 
-the circuit diagram is avaible at the following link:
+the circuit diagram is the following:
 ![MSP432 circuit diagram - schematic](https://user-images.githubusercontent.com/40665241/218135720-05fd87a3-022a-4da2-96a1-655c2c376dc8.svg)
 
 ### Software Requirements
@@ -34,7 +34,7 @@ The project is separated into 3 main categories:
 - games: they implement the modules game logics and loops
 - main: main script to start the program
 
-A visualization in modules of the project is avaible at the following link:
+A visualization in modules of the project is the following:
 ![MSP432 circuit diagram - class diagram](https://user-images.githubusercontent.com/40665241/218137124-db3e8991-c1d4-4d16-9f7b-4af2d4c6d502.svg)
 
 ## Building, Burning, and Running
