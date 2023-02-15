@@ -82,7 +82,7 @@ At first nothing will happen, press the reset button on the MSP (as stated on th
 ### tests
 To run the test you need to copy the "simplelink_msp432p4_sdk_3_40_01_02\source" folder in the root of the project and rename it "msp", then you can run the tests in the "testing files" folder using the command:
 ```bash
-make FILE="name_of_the_file"
+make FILE="file_name.c"
 ```
 
 ## Presentation and Video
