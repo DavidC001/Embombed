@@ -19,6 +19,17 @@ uint8_t* currGameCG; // The current game
 volatile uint8_t cableStatusCG[NUMCAVI]; // The status of the cables
 uint8_t cableCheckedCG[NUMCAVI]; // list of checked cables
 
+/**
+ * @brief setup the cable game
+ * 
+ * @param cables array of correct cables states
+ * @param time pointer to time left in the game
+ * @param currGame pointer to the current game
+ * 
+ * @return None
+ * 
+ * @note sets up game variables and cables driver
+ */
 void setupCG(uint8_t* cables, int* time, uint8_t* currGame){
     CablesToCutCG = cables; // Set the cables to cut
     CGTime = time; // Set the time
@@ -36,6 +47,17 @@ void setupCG(uint8_t* cables, int* time, uint8_t* currGame){
     setupCables(Pins, Ports, cableStatusCG); // Setup the cables
 }
 
+/**
+ * @brief cable game loop
+ * 
+ * @return None
+ * 
+ * @note the game loop
+ * checks the cut cables and gives feedback
+ * if all the cables to cut have been cut the player wins
+ * if the time runs out the player loses
+ * if the game is changed the loop ends
+ */
 void gameCG(){
     //initialization
     uint8_t won = 0; // Set the won state to false

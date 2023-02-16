@@ -72,10 +72,10 @@ int registerADC(void (*intHandler)(void)){
  * @brief start ADC conversion
  * @return None
  * 
- * @note enable conversion and interrupt
- * enable automatic iteration
- * enable conversion trigger
- * from now on the interrupt will be called
+ * @note enable conversion and interrupt,
+ * enable automatic iteration,
+ * enable conversion trigger.
+ * From now on the interrupt will be called
  */
 void enableConvADC(){
     ADC14_configureMultiSequenceMode(ADC_MEM0, ADC_MEM4, true);
