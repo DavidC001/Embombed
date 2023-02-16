@@ -88,15 +88,15 @@ int main(void)
     enableConvADC();
     startTimerControl();
 
+    void (*gameLoops)(void)[] = {
+        gameCC,
+        gameNN,
+        gameSS,
+        gameCG
+    }
+
     while(game_info.time>0){
         __sleep();
-
-        void (*gameLoops)(void)[] = {
-            gameCC,
-            gameNN,
-            gameSS,
-            gameCG
-            }
 
         if(currGame!=GAME_NONE){
             gameLoops[currGame]();
