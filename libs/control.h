@@ -60,7 +60,7 @@ void TA1_0_IRQHandler(void)
  * @brief add a mistake
  * @return None
  * 
- * add a mistake to the counter, turn on the led and send the buzzer melody for a mistake
+ * @note add a mistake to the counter, turn on the led and send the buzzer melody for a mistake
  * if the counter is 3 is game over and the timer is stopped
  */
 void addMistakeControl(){
@@ -79,7 +79,7 @@ void addMistakeControl(){
  * @brief feedback for a correct answer
  * @return None
  * 
- * send the buzzer melody for a correct answer
+ * @note send the buzzer melody for a correct answer
  */
 void correctFeedBackControl(){
     sendBuzzer(correctFreqControl, 6);
@@ -89,7 +89,7 @@ void correctFeedBackControl(){
  * @brief feedback for a solved module
  * @return None
  * 
- * send the buzzer melody for a solved module
+ * @note send the buzzer melody for a solved module
  */
 void victoryFeedBackControl(){
     sendBuzzer(victoryFreqControl, 11);
@@ -99,7 +99,7 @@ void victoryFeedBackControl(){
  * @brief feedback for game over
  * @return None
  * 
- * send the buzzer melody for game over
+ * @note send the buzzer melody for game over
  * and stops the music
  */
 void explosionSound(){
@@ -111,7 +111,7 @@ void explosionSound(){
  * @brief start the countdown
  * @return None
  * 
- * start the timer for the countdown and enable the interrupt
+ * @note start the timer for the countdown and enable the interrupt
  */
 void startTimerControl(){
     Interrupt_enableInterrupt(INT_TA1_0);
@@ -126,7 +126,7 @@ void startTimerControl(){
  * @param SN serial number of the module
  * @return None
  * 
- * setup the control module
+ * @note setup the control module
  * inizialize the LCD, the timer, the LEDs and the buzzer
  */
 void setupControl(int* time, char* SN){

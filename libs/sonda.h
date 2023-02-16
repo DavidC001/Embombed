@@ -90,7 +90,7 @@ void enableInterruptSonda(){
  * @param punt pointer to the variable where the value of the sonda will be written
  * @return None
  * 
- * setup the sonda on the pin and port passed as parameters
+ * @note setup the sonda on the pin and port passed as parameters
  * the value of the sonda will be written in the memory pointed by punt
  */
 void setupSonda(uint16_t pin, uint8_t port, uint32_t ADCInputMap, uint32_t ADCMemory, uint8_t* punt){

@@ -35,7 +35,7 @@ char* UARTCollectedMessage;
  * 
  * @return None
  *
- * setup the UART module to receive a message with a header of size headerSize
+ * @note setup the UART module to receive a message with a header of size headerSize
  * the message will be stored in the array pointed by message
  * the size of the message will be stored in the variable pointed by size
  * the header is composed of headerSize bytes
@@ -77,7 +77,7 @@ void setupUART(char* message,int* size, int headerSize){
  * 
  * @return None
  * 
- * send a message through UART
+ * @note send a message through UART
  * the message is composed of a header of size UARTHeaderSize (defined during setup) and a body of size size
  * the header is composed of UARTHeaderSize bytes
  * the body is composed of size bytes

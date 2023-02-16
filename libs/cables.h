@@ -25,7 +25,7 @@ void IRQ_cables(void){
  * @brief enable interrupt on cables
  * @return None
  * 
- * enable interrupt on pin and register IRQ on port
+ * @note enable interrupt on pin and register IRQ on port
  */
 void enableInterruptCables(){
     int i;
@@ -42,7 +42,7 @@ void enableInterruptCables(){
  * @brief disable interrupt on cables
  * @return None 
  * 
- * remove IRQ handler on port and disable interrupt on pin
+ * @note remove IRQ handler on port and disable interrupt on pin
  */
 void disableInterruptCables(){
     int i;
@@ -60,7 +60,7 @@ void disableInterruptCables(){
  * @param conn vector of connection status
  * 
  * 
- * all vectors must be of size NUMCAVI
+ * @note all vectors must be of size NUMCAVI
  * defined inside constants.h
  * pins and ports can be deleted after calling this function
  * conn vector will be used to communicate with the caller

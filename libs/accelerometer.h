@@ -90,7 +90,7 @@ void ADCAccelerometerIRQ(void)
  * @param currGameP A pointer to the current game state variable.
  * @return None
  *
- * This function initializes the accelerometer sensor by setting up two ADC input pins (P4.2 and P6.1) 
+ * @note This function initializes the accelerometer sensor by setting up two ADC input pins (P4.2 and P6.1) 
  * and configuring two conversion memory registers (ADC_MEM3 and ADC_MEM4) for the x-axis and z-axis readings. 
  * It also registers an interrupt handler function (ADCAccelerometerIRQ) that will be called when a conversion is complete.
  * The function uses three global variables: accFacePunt, accValid, and accBuffer,

@@ -39,7 +39,7 @@ void sendMat(char mat[8]){
  * 
  * @return void
  * 
- * send the command to clear the matrix of led
+ * @note send the command to clear the matrix of led
  */
 void clearMat(){
     int i;
@@ -53,7 +53,7 @@ void clearMat(){
  * 
  * @return void
  * 
- * send the command to shutdown the matrix of led
+ * @note send the command to shutdown the matrix of led
  */
 void shutdownMat(){
     sendCmdMat(MAT_OP_SHUTDOWN, 0x00);
@@ -64,7 +64,7 @@ void shutdownMat(){
  * 
  * @return void
  * 
- * send the command to turn on the matrix of led
+ * @note send the command to turn on the matrix of led
  */
 void turnOnMat(){
     sendCmdMat(MAT_OP_SHUTDOWN, 0x01);
@@ -78,7 +78,7 @@ void turnOnMat(){
  * 
  * @return void
  * 
- * uses the EUSCI_B2 by default the pins are:
+ * @note uses the EUSCI_B2 by default the pins are:
  * P3.5 as clock
  * P3.6 as data
  * the cs pin can be configured

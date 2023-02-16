@@ -55,7 +55,7 @@ void enableInterruptNumPad()
  * @brief evaluate keypad
  * @return None
  * 
- * return the key pressed on the keypad by writing it in the memory pointed by puntNumPad
+ * @note return the key pressed on the keypad by writing it in the memory pointed by puntNumPad
  * passed during the setup
  * if the key is released during the reading it returns 'E'
  * the reading must be discarded (could be a debouncing)
@@ -120,7 +120,7 @@ void IRQ_col(void)
  * @param res pointer to the variable where the pressed key will be written
  * @return None
  * 
- * setup the keypad, the ports and pins used for rows and columns
+ * @note setup the keypad, the ports and pins used for rows and columns
  * and the pointer to the variable where the pressed key will be written
  * 
  * important: the IRQ of the ports used will be blocked

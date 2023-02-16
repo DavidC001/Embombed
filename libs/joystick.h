@@ -43,7 +43,7 @@ void ADCJoystickIRQ(){
  * @brief disable interrupt on joystick
  * @return None
  * 
- * disable interrupt on ADC
+ * @note disable interrupt on ADC
  */
 void disableInterruptJoystick(){
     disableADC(indexJoystickADC);
@@ -53,7 +53,7 @@ void disableInterruptJoystick(){
  * @brief enable interrupt on joystick
  * @return None
  * 
- * enable interrupt on ADC
+ * @note enable interrupt on ADC
  */
 void enableInterruptJoystick(){
     enableADC(indexJoystickADC);
@@ -64,7 +64,7 @@ void enableInterruptJoystick(){
  * @param punt pointer to variable that will contain the direction of the joystick
  * @return None
  * 
- * setup joystick
+ * @note setup joystick
  * configures pin 6.0 and 4.4 as ADC input
  * configures ADC memory 1 and 2
  * registers ADCJoystickIRQ as interrupt handler
