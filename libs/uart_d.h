@@ -26,7 +26,22 @@ volatile int UARTReceivedHeaderSize;
 int* UARTNotifySize;
 char* UARTCollectedMessage;
 
-
+/**
+ * @brief setup UART
+ * 
+ * @param message address of the array where the message will be stored
+ * @param size address of the variable where the size of the message will be stored
+ * @param headerSize size of the header
+ * 
+ * @return None
+ *
+ * setup the UART module to receive a message with a header of size headerSize
+ * the message will be stored in the array pointed by message
+ * the size of the message will be stored in the variable pointed by size
+ * the header is composed of headerSize bytes
+ * 
+ * for more details on the """protocol""" see the development_process_spec.pdf file
+ */
 void setupUART(char* message,int* size, int headerSize){
     UARTPacketSize = 0;
     UARTReceivedSize = 0;
@@ -43,17 +58,6 @@ void setupUART(char* message,int* size, int headerSize){
     GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P1,
                 GPIO_PIN2 | GPIO_PIN3, GPIO_PRIMARY_MODULE_FUNCTION);
 
-    /*
-    //Setting DCO to 48MHz 
-    //Set the core voltage level to VCORE1 
-    PCM_setCoreVoltageLevel(PCM_VCORE1);
-    //Set 2 flash wait states for Flash bank 0 and 1
-    FlashCtl_setWaitState(FLASH_BANK0, 2);
-    FlashCtl_setWaitState(FLASH_BANK1, 2);
-    //Initializes Clock System
-    CS_setDCOCenteredFrequency(CS_DCO_FREQUENCY_48);
-    */
-
     /* Configuring UART Module */
     UART_initModule(EUSCI_A0_BASE, &UARTConfig);
 
@@ -65,6 +69,19 @@ void setupUART(char* message,int* size, int headerSize){
     Interrupt_enableInterrupt(INT_EUSCIA0);
 }
 
+/**
+ * @brief send a message through UART
+ * 
+ * @param data pointer to the array containing the message
+ * @param size size of the message
+ * 
+ * @return None
+ * 
+ * send a message through UART
+ * the message is composed of a header of size UARTHeaderSize (defined during setup) and a body of size size
+ * the header is composed of UARTHeaderSize bytes
+ * the body is composed of size bytes
+ */
 void sendUART(char* data, unsigned int size){
     int i;
 

@@ -24,9 +24,9 @@ typedef enum{
     ROW_2
 } rowSel;
 
-//TODO: usare puntatore a struttura in main
 lcdConfig H_LCD_CONFIG;
 
+//sends the actual data to the lcd
 void serialSend(char d){
     //send 4 high
 
@@ -60,24 +60,37 @@ void serialSend(char d){
     __delay_cycles(9600);
 }
 
+//sends a command to the lcd
 void sendCommand(char cm){
     GPIO_setOutputLowOnPin(H_LCD_CONFIG.port_rs, H_LCD_CONFIG.pin_rs);
     serialSend(cm);
 }
 
+//sends data to the lcd
 void sendData(char data){
     GPIO_setOutputHighOnPin(H_LCD_CONFIG.port_rs, H_LCD_CONFIG.pin_rs);
     serialSend(data);
 }
 
+/**
+ * @brief clear the lcd
+ * @return None
+ */
 void clearLCD(){
     sendCommand(0x01);
     __delay_cycles(96000);
 }
 
-/*
- * presume 48MHz nei wait time
- */
+/**
+ * @brief setup the lcd
+ * @param conf the configuration of the lcd
+ * @return None
+ * 
+ * the configuration of the lcd is a struct with the following fields:
+ * port_rs, pin_rs, port_e, pin_e, port_d4, pin_d4, port_d5, pin_d5, port_d6, pin_d6, port_d7, pin_d7
+ * 
+ * for the waiting time the module assumes a frequency of 48MHz
+*/
 void setupLCD(lcdConfig conf){
     H_LCD_CONFIG = conf;
 
@@ -102,6 +115,17 @@ void setupLCD(lcdConfig conf){
     clearLCD();
 }
 
+/**
+ * @brief display a string on the lcd
+ * @param row the row where the string will be displayed
+ * @param string the string to display
+ * @param size the size of the string
+ * @return None
+ * 
+ * the string will be centered on the row
+ * the row can be ROW_1 or ROW_2
+ * the size of the string must be less than 16
+ */
 void displayLCD(rowSel row, char* string, int size){
     if(row==ROW_1){
         sendCommand(0x80);

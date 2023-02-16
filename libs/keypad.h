@@ -20,6 +20,10 @@ char numPad[4][4] = { '1', '2', '3', 'A',
 
 void IRQ_col(void);
 
+/**
+ * @brief disable interrupt on keypad
+ * @return None
+ */
 void disableInterruptNumPad()
 {
     int i;
@@ -30,6 +34,10 @@ void disableInterruptNumPad()
     }
 }
 
+/**
+ * @brief enable interrupt on keypad
+ * @return None
+ */
 void enableInterruptNumPad()
 {
     int i;
@@ -43,11 +51,14 @@ void enableInterruptNumPad()
     }
 }
 
-/*
- * ritorna la chiave che � stata premuta
- * nel caso di rilevazione durante il rilascio
- * viene ritornato il carattere 'E'
- * va quindi scartata la lettura
+/**
+ * @brief evaluate keypad
+ * @return None
+ * 
+ * return the key pressed on the keypad by writing it in the memory pointed by puntNumPad
+ * passed during the setup
+ * if the key is released during the reading it returns 'E'
+ * the reading must be discarded (could be a debouncing)
  */
 void evaluateKeyPad()
 {
@@ -100,11 +111,22 @@ void IRQ_col(void)
     }
 }
 
-/*
- * IMPORTANTE: gli IRQ delle porte usate saranno bloccati
- * chiamando enableInterrupt vengono resettati gli IRQ
- * � quindi possibile modificarli cambiando modulo
- * previa chiamata di disableInterrupt
+/**
+ * @brief setup keypad
+ * @param rowPorts array of ports used for rows
+ * @param rowPins array of pins used for rows
+ * @param colPorts array of ports used for columns
+ * @param colPins array of pins used for columns
+ * @param res pointer to the variable where the pressed key will be written
+ * @return None
+ * 
+ * setup the keypad, the ports and pins used for rows and columns
+ * and the pointer to the variable where the pressed key will be written
+ * 
+ * important: the IRQ of the ports used will be blocked
+ * calling enableInterrupt the IRQ will be reset
+ * it is therefore possible to modify them by changing module
+ * after calling disableInterrupt
  */
 void setUpKeyPad(uint_fast8_t *rowPorts, uint_fast16_t *rowPins,
                  uint_fast8_t *colPorts, uint_fast16_t *colPins,

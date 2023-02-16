@@ -31,10 +31,14 @@ void removeADC(int index){
 }
 
 
-/*
+/**
+ * @brief registerADC
+ * @param intHandler A pointer to the interrupt handler function.
+ * @return int
+ * 
  * register interrupt
- * ritorna l'indice dove viene salvato
- * non gestisce la mappatura della memoria che va fatta esternamente
+ * return the index where it is saved
+ * does not handle the mapping of the memory that must be done externally
  */
 int registerADC(void (*intHandler)(void)){
     /* Triggering the start of the sample */
@@ -46,6 +50,15 @@ int registerADC(void (*intHandler)(void)){
     return (ADCFuncIndex-1);
 }
 
+/**
+ * @brief start ADC conversion
+ * @return None
+ * 
+ * enable conversion and interrupt
+ * enable automatic iteration
+ * enable conversion trigger
+ * from now on the interrupt will be called
+ */
 void enableConvADC(){
     ADC14_configureMultiSequenceMode(ADC_MEM0, ADC_MEM4, true);
     ADC14_enableInterrupt(ADC_INT4);
@@ -57,7 +70,10 @@ void enableConvADC(){
     ADC14_toggleConversionTrigger();
 }
 
-/*
+/**
+ * @brief setup ADC
+ * @return None
+ * 
  * start automatic iteration
  * and clock to ADCOSC/64/8
  */

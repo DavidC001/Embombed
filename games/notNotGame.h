@@ -20,8 +20,6 @@
 #include <LcdDriver/Crystalfontz128x128_ST7735.h>
 #include <LcdDriver/HAL_MSP_EXP432P401R_Crystalfontz128x128_ST7735.h>
 //TODO sistema linking
-#include <LcdDriver/Crystalfontz128x128_ST7735.c>
-#include <LcdDriver/HAL_MSP_EXP432P401R_Crystalfontz128x128_ST7735.c>
 /* Graphic library context */
 Graphics_Context g_sContext;
 uint8_t sec;

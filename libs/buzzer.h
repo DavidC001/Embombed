@@ -344,6 +344,13 @@ int currentNote = 0;
 int currentNoteDuration = 0;
 uint8_t pauseMusic = 0;
 
+/**
+ * @brief starts the music
+ * @return None
+ * 
+ * This function starts the music by setting up the timer and interrupt
+ * It uses the A2 timer as a metronome set to 1KHz that counts up to 60000/(TEMPO*GRID)
+ */
 void startMusic(){
     //set up A2 timer as metronome
     Timer_A_UpModeConfig config = {
@@ -359,6 +366,12 @@ void startMusic(){
     Timer_A_startCounter(TIMER_A2_BASE, TIMER_A_UP_MODE);
 }
 
+/**
+ * @brief stops the music
+ * @return None
+ * 
+ * This function stops the music by stopping the timers and setting the pause flag
+ */
 void stopMusic(){
     Timer_A_stopTimer(TIMER_A2_BASE);
     Timer_A_stopTimer(TIMER_A0_BASE);
@@ -387,9 +400,19 @@ void TA2_0_IRQHandler(void)
 }
 
 
-/*
- * send frequency (in Hz) played for 20ms to buzzer
-*/
+/**
+ * @brief send a buzzer melody
+ * 
+ * @param freq array of frequencies to play
+ * @param size size of the array
+ * 
+ * @return None
+ * 
+ * This function plays a melody on the buzzer
+ * It uses the A0 timer to generate the sound
+ * each frequency is played for 20ms
+ * to make it easier to hear the melody, there is 20ms of silence before and after the melody
+ */
 void sendBuzzer(int freq[], int size){
     //stop music
     pauseMusic = 1;
@@ -416,6 +439,13 @@ void sendBuzzer(int freq[], int size){
     pauseMusic = 0;
 }
 
+/**
+ * @brief sets up the buzzer
+ * @return None
+ * 
+ * This function sets up the buzzer by setting up the timer and the PWM
+ * It uses the A0 timer to generate the sound
+ */
 void setupBuzzer(){
     /* Configures P2.7 to PM_TA0.4 for using Timer PWM to control the buzzer */
     GPIO_setAsPeripheralModuleFunctionOutputPin(GPIO_PORT_P2, GPIO_PIN7,

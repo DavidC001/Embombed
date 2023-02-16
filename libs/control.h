@@ -55,8 +55,13 @@ void TA1_0_IRQHandler(void)
         }
     }
 }
-/*
- * aggiunge un errore velocizzando il timer
+
+/**
+ * @brief add a mistake
+ * @return None
+ * 
+ * add a mistake to the counter, turn on the led and send the buzzer melody for a mistake
+ * if the counter is 3 is game over and the timer is stopped
  */
 void addMistakeControl(){
     GPIO_setOutputHighOnPin(errLedPortsControl[numMistekesControl], errLedPinsControl[numMistekesControl]);
@@ -70,21 +75,43 @@ void addMistakeControl(){
     sendBuzzer(errFreqControl, 6);
 }
 
+/**
+ * @brief feedback for a correct answer
+ * @return None
+ * 
+ * send the buzzer melody for a correct answer
+ */
 void correctFeedBackControl(){
     sendBuzzer(correctFreqControl, 6);
 }
 
+/**
+ * @brief feedback for a solved module
+ * @return None
+ * 
+ * send the buzzer melody for a solved module
+ */
 void victoryFeedBackControl(){
     sendBuzzer(victoryFreqControl, 11);
 }
 
+/**
+ * @brief feedback for game over
+ * @return None
+ * 
+ * send the buzzer melody for game over
+ * and stops the music
+ */
 void explosionSound(){
     sendBuzzer(explosionFreqControl, 20);
     stopMusic();
 }
 
-/*
- * inizia il countdown
+/**
+ * @brief start the countdown
+ * @return None
+ * 
+ * start the timer for the countdown and enable the interrupt
  */
 void startTimerControl(){
     Interrupt_enableInterrupt(INT_TA1_0);
@@ -93,9 +120,14 @@ void startTimerControl(){
     Timer_A_startCounter(TIMER_A1_BASE, TIMER_A_UP_MODE);
 }
 
-/*
- * inizializza l'LCD (essendo l'unico modulo a contatto)
- * inizializza il timer e lo mette in pausa
+/**
+ * @brief setup the control module
+ * @param time pointer to the time variable
+ * @param SN serial number of the module
+ * @return None
+ * 
+ * setup the control module
+ * inizialize the LCD, the timer, the LEDs and the buzzer
  */
 void setupControl(int* time, char* SN){
     timeControl = time;
