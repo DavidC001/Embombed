@@ -130,12 +130,14 @@ def genSimonSays():
     for i in range(0, numTurni):
         movesTurno = []
         matTurno = []
+        prec = -1
         numStep = random.randint(2, 3)
         for j in range(0, numStep):
             move = random.randint(0, len(lookUpTables[i])-1)
-            while len(movesTurno)>1 and move == movesTurno[-1]:
+            while move == prec:
                 move = random.randint(0, len(lookUpTables[i])-1)
             movesTurno.append(lookUpTables[i][move]["move"])
+            prec = move
             #convert the mat in 8x8 like follows and encode each row as a char
             mat8x8 = []
             for k in range(0, 8):
