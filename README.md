@@ -72,11 +72,11 @@ A visualization in modules of the project is the following:
 
 ### project
 The only resources needed to run the project are in the following directories:
-- "python server": contains the python script main.py to be run on the machine connected to the MSP (ports are for windows11, you may need to change them), it will also create a webpage acessible via port 8080
+- "python server": contains the python script main.py to be run on the machine connected to the MSP (ports are for windows11, you may need to change them), it will also create a webpage acessible via port 8080 with the manual
 - "libs" and "games": those folders need to be added to the include search path
 - "main.c": this is the main script to run for the program to start
 
-Create a CCS project for the MSP, add the includes search path and copy the main.c file. Then you can connect the MSP, flash the program and then run main.py.
+Create a CCS project for the MSP, copy the content of libs and games folder and the main.c file into the project. Then you can connect the MSP, flash the program and run main.py script contained in the python server folder.
 At first nothing will happen, press the reset button on the MSP (as stated on the webpage at port 8080) and start playing.
 
 ### tests

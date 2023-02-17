@@ -1,15 +1,6 @@
 #ifndef __ADCSUB_H__
 #define __ADCSUB_H__
 
-/* DriverLib Includes */
-#include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-#include <constants.h>
-
-
-void (*ADCIntHandlers[MAX_FUNC])(void);
-uint8_t ADCenabled[MAX_FUNC];
-int ADCFuncIndex;
-
 /**
  * @brief disable ADC handler
  * 
@@ -19,9 +10,7 @@ int ADCFuncIndex;
  * 
  * @note the handler is not removed from the list, it is just disabled
  */
-void disableADC(int index){
-    ADCenabled[index] = 0;
-}
+void disableADC(int index);
 
 /**
  * @brief enable ADC handler
@@ -32,21 +21,18 @@ void disableADC(int index){
  * 
  * @note the handler is not removed from the list, it is just enabled
  */
-void enableADC(int index){
-    ADCenabled[index] = 1;
-}
+void enableADC(int index);
 
-//usata credo mai poco importa l'efficenza
-void removeADC(int index){
-    while(!ADC14_disableModule());
-    int i;
-    for(i=index;i<ADCFuncIndex-1;i++){
-        ADCIntHandlers[i] = ADCIntHandlers[i+1];
-        ADCenabled[i] = ADCenabled[i+1];
-    }
-    ADCFuncIndex--;
-    ADC14_enableModule();
-}
+/**
+ * @brief remove ADC handler
+ * 
+ * @param index the index of the handler to remove
+ * 
+ * @return None
+ * 
+ * @note the handler is removed from the list
+ */
+void removeADC(int index);
 
 
 /**
@@ -58,15 +44,7 @@ void removeADC(int index){
  * return the index where it is saved
  * does not handle the mapping of the memory that must be done externally
  */
-int registerADC(void (*intHandler)(void)){
-    /* Triggering the start of the sample */
-
-    ADCIntHandlers[ADCFuncIndex] = intHandler;
-    ADCenabled[ADCFuncIndex] = 1;
-    ADCFuncIndex++;
-
-    return (ADCFuncIndex-1);
-}
+int registerADC(void (*intHandler)(void));
 
 /**
  * @brief start ADC conversion
@@ -77,16 +55,7 @@ int registerADC(void (*intHandler)(void)){
  * enable conversion trigger.
  * From now on the interrupt will be called
  */
-void enableConvADC(){
-    ADC14_configureMultiSequenceMode(ADC_MEM0, ADC_MEM4, true);
-    ADC14_enableInterrupt(ADC_INT4);
-    /* Enabling Interrupts */
-    Interrupt_enableInterrupt(INT_ADC14);
-    //automatic iteration
-    ADC14_enableSampleTimer(ADC_AUTOMATIC_ITERATION);
-    ADC14_enableConversion();
-    ADC14_toggleConversionTrigger();
-}
+void enableConvADC();
 
 /**
  * @brief setup ADC
@@ -95,27 +64,6 @@ void enableConvADC(){
  * @note start automatic iteration
  * and clock to ADCOSC/64/8
  */
-void setupADC(){
-    ADCFuncIndex = 0;
-
-    //init module
-    ADC14_enableModule();
-    ADC14_initModule(ADC_CLOCKSOURCE_ADCOSC, ADC_PREDIVIDER_64, ADC_DIVIDER_8,
-                0);
-}
-
-void ADC14_IRQHandler(void)
-{
-    uint64_t status = ADC14_getEnabledInterruptStatus();
-    ADC14_clearInterruptFlag(status);
-
-    int i;
-
-    for(i=0;i<ADCFuncIndex;i++){
-        if(ADCenabled[i]){
-            (*ADCIntHandlers[i])();
-        }
-    }
-}
+void setupADC();
 
 #endif

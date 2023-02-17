@@ -1,5 +1,16 @@
+int max(int a, int b){
+    if(a>b){
+        return a;
+    }else{
+        return b;
+    }
+}
+
 #include "../games/notNotGame.h"
 #include "../libs/game_parser.h"
+#include "../games/notNotGame.c"
+#include "../libs/game_parser.c"
+#include "../libs/emulators/control.h"
 #include <stdio.h>
 #include <string.h>
 

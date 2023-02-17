@@ -2,24 +2,6 @@
 #define __CABLES_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-#include <constants.h>
-
-uint_fast16_t pinCables[NUMCAVI];
-uint_fast8_t portCables[NUMCAVI];
-uint8_t* connectedCables;
-
-void IRQ_cables(void){
-    int i;
-    //debounce
-    __delay_cycles(48000);
-    for(i=0;i<NUMCAVI;i++){
-        GPIO_clearInterruptFlag(portCables[i], pinCables[i]);
-        uint8_t val = GPIO_getInputPinValue(portCables[i], pinCables[i]);
-        if(!val){
-            connectedCables[i] = 0;
-        }
-    }
-}
 
 /**
  * @brief enable interrupt on cables
@@ -27,16 +9,7 @@ void IRQ_cables(void){
  * 
  * @note enable interrupt on pin and register IRQ on port
  */
-void enableInterruptCables(){
-    int i;
-    for (i = 0; i < NUMCAVI; i++)
-    {
-        GPIO_clearInterruptFlag(portCables[i], pinCables[i]);
-        GPIO_enableInterrupt(portCables[i], pinCables[i]);
-
-        GPIO_registerInterrupt(portCables[i], IRQ_cables);
-    }
-}
+void enableInterruptCables();
 
 /**
  * @brief disable interrupt on cables
@@ -44,14 +17,7 @@ void enableInterruptCables(){
  * 
  * @note remove IRQ handler on port and disable interrupt on pin
  */
-void disableInterruptCables(){
-    int i;
-    for (i = 0; i < NUMCAVI; i++)
-    {
-        GPIO_unregisterInterrupt (portCables[i]);
-        GPIO_disableInterrupt(portCables[i], pinCables[i]);
-    }
-}
+void disableInterruptCables();
 
 /**
  * @brief setup cables
@@ -71,23 +37,6 @@ void disableInterruptCables(){
  *
  * ordine cavi: P Y G R
  */
-void setupCables(uint_fast16_t* pins, uint_fast8_t* ports,uint8_t* conn){
-    connectedCables = conn;
-
-    int i;
-    for(i=0;i<NUMCAVI;i++){
-        pinCables[i] = pins[i];
-        portCables[i] = ports[i];
-        connectedCables[i] = 1;
-
-        //enable interrupts
-        GPIO_setDriveStrengthHigh(portCables[i], pinCables[i]);
-        GPIO_setAsInputPinWithPullDownResistor(portCables[i], pinCables[i]);
-        GPIO_interruptEdgeSelect(portCables[i], pinCables[i], GPIO_HIGH_TO_LOW_TRANSITION);
-        GPIO_clearInterruptFlag(portCables[i], pinCables[i]);
-    }
-
-    disableInterruptCables();
-}
+void setupCables(uint_fast16_t* pins, uint_fast8_t* ports,uint8_t* conn);
 
 #endif
