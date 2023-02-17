@@ -43,6 +43,8 @@ The project is organized in the following way:
   ├── testing files      # files used to test the different parts of the project
   |   ├── makefile       # makefile to compile the files with the includes and defines needed
   │   └── ...
+  ├── msp                # files needed to run the tests
+  |   └── ...
   |
   ├── python server
   │   ├── main.py        # python script to run on the machine connected to the MSP
@@ -80,7 +82,7 @@ Create a CCS project for the MSP, copy the content of libs and games folder and 
 At first nothing will happen, press the reset button on the MSP (as stated on the webpage at port 8080) and start playing.
 
 ### tests
-To run the test you need to copy the "simplelink_msp432p4_sdk_3_40_01_02\source" folder in the root of the project and rename it "msp", then you can run the tests in the "testing files" folder using the command:
+you can run the tests in the "testing files" folder using the command:
 ```bash
 make FILE="file_name.c"
 ```
