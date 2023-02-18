@@ -90,7 +90,7 @@ make FILE="file_name.c"
 ## Presentation and Video
 
 - PowerPoint Presentation: [Link to PowerPoint presentation]
-- YouTube Video: [Link to YouTube video]
+- YouTube Video: [[Link to YouTube video]](https://youtu.be/mFVSnlVLkkg)
 
 ## Team Members
 
