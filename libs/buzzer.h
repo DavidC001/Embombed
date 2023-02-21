@@ -22,8 +22,6 @@ void stopMusic();
  * @brief speeds up the music
  * @param speed_factor the factor to speed up the music by (1.0 = normal speed, 2.0 = double speed, etc.)
  * @return None
- * 
- * @note This function pauses the music by setting the pause flag
  */
 void speedUpMusic(float speed_factor);
 
