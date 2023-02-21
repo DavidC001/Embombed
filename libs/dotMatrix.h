@@ -4,6 +4,17 @@
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
 
 /**
+ * @brief show a pattern
+ * 
+ * @param mat the matrix of led to send each bit is a led
+ * 
+ * @return void
+ * 
+ * @note send the matrix to the matrix of led
+ */
+void sendMat(char mat[8]);
+
+/**
  * @brief clear the matrix of led
  * 
  * @return void
