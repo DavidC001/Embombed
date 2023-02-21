@@ -64,6 +64,7 @@ void addMistakeControl(){
     }
 
     sendBuzzer(errFreqControl, 6);
+    speedUpMusic(1+0.8*numMistekesControl);
 }
 
 void correctFeedBackControl(){

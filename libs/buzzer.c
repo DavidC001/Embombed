@@ -384,6 +384,20 @@ void TA2_0_IRQHandler(void)
     }
 }
 
+void speedUpMusic(float speed_factor){
+    //set up A2 timer as metronome
+    Timer_A_UpModeConfig config = {
+            TIMER_A_CLOCKSOURCE_ACLK,
+            TIMER_A_CLOCKSOURCE_DIVIDER_1,
+            60000/((TEMPO*GRID)*speed_factor),
+            TIMER_A_TAIE_INTERRUPT_DISABLE,
+            TIMER_A_CCIE_CCR0_INTERRUPT_ENABLE,
+            TIMER_A_SKIP_CLEAR
+    };
+    Timer_A_configureUpMode(TIMER_A2_BASE, &config);
+    Timer_A_startCounter(TIMER_A2_BASE, TIMER_A_UP_MODE);
+}
+
 void sendBuzzer(int freq[], int size){
     //stop music
     pauseMusic = 1;
