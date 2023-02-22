@@ -89,7 +89,7 @@ make FILE="file_name.c"
 
 ## Presentation and Video
 
-- PowerPoint Presentation: [Link to PowerPoint presentation]
+- PowerPoint Presentation: [[Link to pptx]](https://github.com/DavidC001/Embombed/blob/main/presentazione.pptx)
 - YouTube Video: [[Link to YouTube video]](https://youtu.be/mFVSnlVLkkg)
 
 ## Team Members
