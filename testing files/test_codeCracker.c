@@ -1,4 +1,6 @@
 #include "../games/codeCracker.h"
+#include "../games/codeCracker.c"
+#include "../libs/emulators/control.h"
 #include <stdio.h>
 
 void setup(){

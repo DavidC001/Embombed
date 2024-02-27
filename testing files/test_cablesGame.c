@@ -1,4 +1,6 @@
 #include "../games/cableGame.h"
+#include "../games/cableGame.c"
+#include "../libs/emulators/control.h"
 #include <stdio.h>
 
 void setup(){

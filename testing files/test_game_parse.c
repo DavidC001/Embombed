@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "../libs/emulators/mutex.h"
 #include <game_parser.h>
+#include <game_parser.c>
 
 int main(){
     initMutex();

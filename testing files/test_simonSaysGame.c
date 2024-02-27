@@ -1,5 +1,7 @@
 #include "../games/simonSaysGame.h"
 #include "../libs/game_parser.h"
+#include "../games/simonSaysGame.c"
+#include "../libs/game_parser.c"
 #include <stdio.h>
 #include <string.h>
 

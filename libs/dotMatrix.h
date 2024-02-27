@@ -2,115 +2,67 @@
 #define __DOTMATRIX_H__
 
 #include <ti/devices/msp432p4xx/driverlib/driverlib.h>
-#include <constants.h>
 
-uint32_t eUSCIPort;
-uint_fast16_t matPin;
-uint_fast8_t matPort;
-
-const eUSCI_SPI_MasterConfig matrixConfig = {
-                                 EUSCI_SPI_CLOCKSOURCE_SMCLK,
-                                 48000000,
-                                 10000000,
-                                 EUSCI_SPI_MSB_FIRST,
-                                 EUSCI_B_SPI_PHASE_DATA_CAPTURED_ONFIRST_CHANGED_ON_NEXT ,
-                                 EUSCI_SPI_CLOCKPOLARITY_INACTIVITY_LOW,
-                                 EUSCI_SPI_3PIN
-};
-
-void sendCmdMat(char cmd, char data){
-    GPIO_setOutputLowOnPin(matPort, matPin);
-    SPI_transmitData(eUSCIPort, cmd);
-    while (SPI_isBusy(eUSCIPort) != EUSCI_SPI_NOT_BUSY);
-    SPI_transmitData(eUSCIPort, data);
-    while (SPI_isBusy(eUSCIPort) != EUSCI_SPI_NOT_BUSY);
-    /*
-    int i;
-    for (i=0;i<8;i++){
-        int k;
-        if(cmd & 0b10000000){
-            GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN6);
-        } else {
-            GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN6);
-        }
-        for(k=0;k<500;k++);
-        GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN5);
-        for(k=0;k<500;k++);
-        GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN5);
-        cmd=cmd<<1;
-    }
-    for (i=0;i<8;i++){
-        int k;
-        if(data & 0b10000000) {
-            GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN6);
-        } else {
-            GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN6);
-        }
-        for(k=0;k<500;k++);
-        GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN5);
-        for(k=0;k<500;k++);
-        GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN5);
-        data=data<<1;
-    }
-    */
-    GPIO_setOutputHighOnPin(matPort, matPin);
-}
-
-void sendMat(char mat[8]){
-    int i;
-    for(i=0;i<8;i++){
-        sendCmdMat(i+1, mat[i]);
-    }
-}
-
-void clearMat(){
-    int i;
-    for(i=0;i<8;i++){
-        sendCmdMat(i+1, 0x00);
-    }
-}
-
-void shutdownMat(){
-    sendCmdMat(MAT_OP_SHUTDOWN, 0x00);
-}
-
-void turnOnMat(){
-    sendCmdMat(MAT_OP_SHUTDOWN, 0x01);
-}
-
-/*
- * di default usa la EUSCI_B2
- * i pin sono:
- * P3.5 come clock
- * P3.6 con data
- *
- * il pin cs pu� essere configurato
+/**
+ * @brief show a pattern
+ * 
+ * @param mat the matrix of led to send each bit is a led
+ * 
+ * @return void
+ * 
+ * @note send the matrix to the matrix of led
  */
-void initMatrix(uint_fast8_t csPort, uint_fast16_t csPin){
-    matPort = csPort;
-    matPin = csPin;
-    eUSCIPort = EUSCI_B2_BASE;
+void sendMat(char mat[8]);
 
-    GPIO_setAsOutputPin(csPort, csPin);
+/**
+ * @brief clear the matrix of led
+ * 
+ * @return void
+ * 
+ * @note send the command to clear the matrix of led
+ */
+void clearMat();
 
-    //GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN5 | GPIO_PIN6 | GPIO_PIN7);
-    /* Selecting P1.5 P1.6 and P1.7 in SPI mode */
-    GPIO_setAsPeripheralModuleFunctionInputPin(GPIO_PORT_P3, GPIO_PIN5 | GPIO_PIN6, GPIO_PRIMARY_MODULE_FUNCTION);
+/**
+ * @brief shutdown the matrix of led
+ * 
+ * @return void
+ * 
+ * @note send the command to shutdown the matrix of led
+ */
+void shutdownMat();
 
+/**
+ * @brief turn on the matrix of led
+ * 
+ * @return void
+ * 
+ * @note send the command to turn on the matrix of led
+ */
+void turnOnMat();
 
-    SPI_initMaster(eUSCIPort, &matrixConfig);
-    SPI_enableModule(eUSCIPort);
-
-    GPIO_setOutputHighOnPin(matPort, matPin);
-    //GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_PIN5);
-
-    sendCmdMat(MAT_OP_DISPLAYTEST, 0x00);
-    sendCmdMat(MAT_OP_SCANLIMIT, 0x0f);
-    sendCmdMat(MAT_OP_INTENSITY, 0x0e);
-    sendCmdMat(MAT_OP_DECODEMODE, 0x00);
-    clearMat();
-    shutdownMat();
-}
+/**
+ * @brief initialize the matrix of led
+ * 
+ * @param csPort the port of the chip select
+ * @param csPin the pin of the chip select
+ * 
+ * @return void
+ * 
+ * @note uses the EUSCI_B2 by default the pins are:
+ * P3.5 as clock
+ * P3.6 as data
+ * the cs pin can be configured
+ * 
+ * the pins are configured and then the matrix is initialized with the following commands:
+ * display test off
+ * scan limit 8
+ * intensity 14
+ * decode mode off
+ * clear the matrix
+ * shutdown the matrix
+ */
+void initMatrix(uint_fast8_t csPort, uint_fast16_t csPin);
 
 
 #endif

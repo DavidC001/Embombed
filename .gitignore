@@ -1,5 +1,4 @@
 .vscode
-msp/
 __pycache__
 testing/exec
 python/genGame/game

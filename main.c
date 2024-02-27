@@ -88,26 +88,18 @@ int main(void)
     enableConvADC();
     startTimerControl();
 
+    void (*gameLoops[])(void) = {
+        gameCC,
+        gameNN,
+        gameSS,
+        gameCG
+    };
+
     while(game_info.time>0){
         __sleep();
 
-        switch(currGame){
-        case GAME_CABLES:
-            printf("starting game cavi\n");
-            gameCG();
-            break;
-        case GAME_CODECRACKER:
-            printf("starting game code cracker\n");
-            gameCC();
-            break;
-        case GAME_NOTNOT:
-            printf("starting not not game\n");
-            gameNN();
-            break;
-        case GAME_SIMONSAYS:
-            printf("starting game simon\n");
-            gameSS();
-            break;
+        if(currGame!=GAME_NONE){
+            gameLoops[currGame]();
         }
 
     }
