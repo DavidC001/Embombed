@@ -95,5 +95,4 @@ make FILE="file_name.c"
 
 ## Team Members
 ### Davide Cavicchini
-With the contribution of
-### Ovidiu Costin Andrioaia
+#### With the contribution of Ovidiu Costin Andrioaia
