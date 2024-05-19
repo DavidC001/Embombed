@@ -93,6 +93,5 @@ make FILE="file_name.c"
 - PowerPoint Presentation: [[Link to pptx]](https://github.com/DavidC001/Embombed/blob/main/presentazione.pptx)
 - YouTube Video: [[Link to YouTube video]](https://youtu.be/mFVSnlVLkkg)
 
-## Team Members
-### Davide Cavicchini
-#### With the contribution of Ovidiu Costin Andrioaia
+## Developed by Davide Cavicchini
+### With the contribution of Ovidiu Costin Andrioaia
