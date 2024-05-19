@@ -94,5 +94,6 @@ make FILE="file_name.c"
 - YouTube Video: [[Link to YouTube video]](https://youtu.be/mFVSnlVLkkg)
 
 ## Team Members
-
 ### Davide Cavicchini
+With the contribution of
+### Ovidiu Costin Andrioaia
